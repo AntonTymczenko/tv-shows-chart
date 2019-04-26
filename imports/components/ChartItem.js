@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 const ChartItem = ({ show }) => (
   <tr>
@@ -6,5 +7,10 @@ const ChartItem = ({ show }) => (
     <td>{ show.title }</td>
   </tr>
 )
+
+ChartItem.propTypes = {
+  rating: PropTypes.number,
+  title: PropTypes.string,
+};
 
 export default ChartItem

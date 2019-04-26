@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import ChartItem from '/imports/components/ChartItem'
@@ -30,6 +31,10 @@ const App = props => (
     </main>
   </div>
 );
+
+App.propTypes = {
+  shows: PropTypes.array,
+}
 
 export default withTracker(() => {
   return {
