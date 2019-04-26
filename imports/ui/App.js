@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import ChartItem from '/imports/components/ChartItem'
 import Shows from '/imports/api/shows';
 
-const App = props => (
+const App = ({ shows }) => (
   <div>
     <header>
       <h1>TV shows chart</h1>
@@ -20,12 +20,9 @@ const App = props => (
           </tr>
         </thead>
         <tbody>
-        { props.shows.length
-          ? props.shows.map(show => (
-            <ChartItem show={show} key={show._id}/>
-          ))
-          : null
-        }
+          { shows.length ? shows.map(show => (
+            <ChartItem show={show} key={show._id} />
+          )) : null }
         </tbody>
       </table>
     </main>
@@ -33,11 +30,9 @@ const App = props => (
 );
 
 App.propTypes = {
-  shows: PropTypes.array,
+  shows: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default withTracker(() => {
-  return {
-    shows: Shows.find({}).fetch(),
-  };
-})(App);
+export default withTracker(() => ({
+  shows: Shows.find({}).fetch(),
+}))(App);

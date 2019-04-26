@@ -9,8 +9,10 @@ const ChartItem = ({ show }) => (
 )
 
 ChartItem.propTypes = {
-  rating: PropTypes.number,
-  title: PropTypes.string,
+  show: PropTypes.shape({
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ChartItem
