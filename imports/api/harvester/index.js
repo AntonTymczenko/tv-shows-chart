@@ -20,7 +20,7 @@ const updateEvery = period => {
   setInterval(Meteor.bindEnvironment(updateOnce), period * 60 * 1000)
 }
 
-const { UPDATE_PERIOD = 5 } = process.env // in minutes
+const UPDATE_PERIOD = parseInt(process.env.UPDATE_PERIOD) || 1440 // in minutes
 
 export default function() {
   updateEvery(UPDATE_PERIOD)
