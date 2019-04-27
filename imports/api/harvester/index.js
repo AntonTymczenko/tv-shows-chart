@@ -9,7 +9,8 @@ const updateEvery = period => {
       updateDatabase(err => {
         if (err) {
           console.error(err.message || err)
-          updateOnce()
+          console.error('Will retry to update in 1 minute')
+          setTimeout(Meteor.bindEnvironment(updateOnce), 60000)
         } else console.log('DB was updated')
       })
     }
@@ -19,7 +20,7 @@ const updateEvery = period => {
   setInterval(Meteor.bindEnvironment(updateOnce), period * 60 * 1000)
 }
 
-const { UPDATE_PERIOD = 0.5 } = process.env // in minutes
+const { UPDATE_PERIOD = 5 } = process.env // in minutes
 
 export default function() {
   updateEvery(UPDATE_PERIOD)

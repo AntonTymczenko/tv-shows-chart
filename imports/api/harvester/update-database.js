@@ -1,10 +1,17 @@
-import { LogEntries, Shows } from '/imports/api/collections'
+import { LogEntries } from '/imports/api/collections';
+import fetchTrending from './fetch-trending';
 
 const errMsg = id => `Unsuccessful DB update. Read more in log entry ${id}`
 
-export default function(cb) {
+export default async function(cb) {
   // do some DB update
-  const status = Math.round(Math.random()) ? 200 : 500
+  let status = 500
+  try {
+    const res = await fetchTrending
+    status = res.status
+  } catch (err) {
+    return cb(err)
+  }
 
   // Write Log about last DB update try
   LogEntries.insert({
