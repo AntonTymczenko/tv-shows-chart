@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-const ChartItem = ({ show }) => (
+const ChartItem = ({ show, chartFields }) => (
   <tr>
-    <td>{ show.rating }</td>
-    <td>{ show.title }</td>
+    { chartFields.map(field => (
+      <td key={field.slug}>{
+        show[field.slug]
+      }</td>
+    ))}
   </tr>
 )
 

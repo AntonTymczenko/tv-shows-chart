@@ -4,6 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 import ChartItem from '/imports/components/ChartItem'
 import { Shows } from '/imports/api/collections';
+import { chartFields } from '/imports/constants';
 
 const App = ({ shows }) => (
   <div>
@@ -15,13 +16,18 @@ const App = ({ shows }) => (
       <table>
         <thead>
           <tr>
-            <th>Rating</th>
-            <th>Title</th>
+            { chartFields.map(field => (
+              <th key={field.slug}>{ field.name }</th>
+            ))}
           </tr>
         </thead>
         <tbody>
           { shows.length ? shows.map(show => (
-            <ChartItem show={show} key={show._id} />
+            <ChartItem
+              show={show}
+              key={show._id}
+              chartFields={chartFields}
+            />
           )) : null }
         </tbody>
       </table>
