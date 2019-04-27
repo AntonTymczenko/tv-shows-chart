@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import ChartItem from '/imports/components/ChartItem'
-import Shows from '/imports/api/shows';
+import { Shows } from '/imports/api/collections';
 
 const App = ({ shows }) => (
   <div>
