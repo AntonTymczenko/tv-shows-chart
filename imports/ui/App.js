@@ -40,5 +40,5 @@ App.propTypes = {
 }
 
 export default withTracker(() => ({
-  shows: Shows.find({}).fetch(),
+  shows: Shows.find({}, { limit: 20, sort: { rating: -1 } }).fetch(),
 }))(App);
