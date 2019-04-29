@@ -10,14 +10,14 @@ const updateEvery = period => {
         if (err) {
           console.error(err.message || err)
           console.error('Will retry to update in 1 minute')
-          setTimeout(Meteor.bindEnvironment(updateOnce), 60000)
+          Meteor.setTimeout(updateOnce, 60000)
         } else console.log('DB was updated')
       })
     }
   }
 
   updateOnce()
-  setInterval(Meteor.bindEnvironment(updateOnce), period * 60 * 1000)
+  Meteor.setInterval(updateOnce, period * 60 * 1000)
 }
 
 const UPDATE_PERIOD = parseInt(process.env.UPDATE_PERIOD) || 1440 // in minutes
