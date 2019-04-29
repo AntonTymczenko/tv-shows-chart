@@ -1,7 +1,7 @@
 const chartFields = [
   {
     name: 'Watchers',
-    slug: 'rating'
+    slug: 'watchers'
   }, {
     name: 'Title',
     slug: 'title'

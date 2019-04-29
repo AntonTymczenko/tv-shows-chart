@@ -17,10 +17,10 @@ export default (page, limit) => new Promise((resolve, reject) => {
     if (err) resolve(err)
 
     const pagesTotal = res.headers['x-pagination-page-count']
-    
+
     const toSave = res.data.map(show => ({
       ...show.show,
-      rating: show.watchers,
+      watchers: show.watchers,
     }))
 
     Promise.all(toSave.map(show => saveOneShow(show)))
