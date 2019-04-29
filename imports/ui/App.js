@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import ChartItem from '/imports/components/ChartItem'
 import { Shows } from '/imports/api/collections';
 import { chartFields } from '/imports/constants';
+
+const updateDB = () => {
+  Meteor.call('updateDatabase')
+}
 
 const App = ({ shows }) => (
   <div>
@@ -13,6 +18,7 @@ const App = ({ shows }) => (
     </header>
 
     <main>
+      <button onClick={updateDB}>UPDATE</button>
       <table>
         <thead>
           <tr>

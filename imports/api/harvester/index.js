@@ -30,6 +30,12 @@ const updateEvery = period => {
 
 const UPDATE_PERIOD = parseInt(process.env.UPDATE_PERIOD) || 1440 // in minutes
 
+Meteor.methods({
+  updateDatabase() {
+    updateOnce(undefined, { manual: true })
+  }
+})
+
 export default function() {
   updateEvery(UPDATE_PERIOD)
 }
