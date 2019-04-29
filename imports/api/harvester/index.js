@@ -2,22 +2,30 @@ import { Meteor } from 'meteor/meteor'
 import updatedLessThanMinutes from './updated-recently'
 import updateDatabase from './update-database'
 
-const updateEvery = period => {
-  function updateOnce() {
-    const needsUpdate = !updatedLessThanMinutes(period)
-    if (needsUpdate) {
-      updateDatabase(err => {
-        if (err) {
-          console.error(err.message || err)
-          console.error('Will retry to update in 1 minute')
-          Meteor.setTimeout(updateOnce, 60000)
-        } else console.log('DB was updated')
-      })
-    }
+async function updateOnce(period = 0, { manual = false } = {}) {
+  const goUpdate = ({ manual }) => {
+    updateDatabase({ manual }, err => {
+      if (err) {
+        console.error(err.message || err)
+        console.error('Will retry to update in 1 minute')
+        Meteor.setTimeout(updateOnce, 60000)
+      }
+    })
   }
 
-  updateOnce()
-  Meteor.setInterval(updateOnce, period * 60 * 1000)
+  if (manual) {
+    goUpdate({ manual })
+  } else {
+    const updatedRecently = await updatedLessThanMinutes(period)
+    if (!updatedRecently) {
+      goUpdate({ manual })
+    }
+  }
+}
+
+const updateEvery = period => {
+  updateOnce(period)
+  Meteor.setInterval(() => updateOnce(period), period * 60 * 1000)
 }
 
 const UPDATE_PERIOD = parseInt(process.env.UPDATE_PERIOD) || 1440 // in minutes
