@@ -3,23 +3,20 @@ import fetchTrending from './fetch-trending';
 
 const errMsg = id => `Unsuccessful DB update. Read more in log entry ${id}`
 
-export default async function(cb) {
-  // do some DB update
-  let status = 500
+export default async ({ manual }, cb) => {
   try {
     const res = await fetchTrending
-    status = res.status
-  } catch (err) {
+
+    LogEntries.insert({
+      ...res,
+      manual,
+      date: new Date(),
+    }, (err, id) => {
+      if (err) throw err
+      if (res.status !== 200) throw new Error(errMsg(id))
+      return cb()
+    });
+  } catch(err) {
     return cb(err)
   }
-
-  // Write Log about last DB update try
-  LogEntries.insert({
-    date: new Date(),
-    status,
-  }, (err, id) => {
-    if (err) return cb(err)
-    if (status !== 200) return cb(new Error(errMsg(id)))
-    return cb()
-  });
 }
