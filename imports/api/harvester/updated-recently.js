@@ -5,13 +5,17 @@ export default function(treshold) {
   if (typeof treshold !== 'number' || treshold < 0) {
     throw new Error('Specify treshold value in minutes')
   }
-  const list = LogEntries.find({ status: 200 }, { sort: { date: -1 } }).fetch()
-
-  const lastLogEntryDate = list.length && new Date(list[0].date)
-  if (!lastLogEntryDate) {
+  const mostRecentLogOfSuccess = LogEntries.findOne(
+    { status: 200 },
+    { sort: { date: -1 } }
+  )
+  if (!mostRecentLogOfSuccess) {
     return // db never was updated successfully
   }
+  const dateOfSuccess = new Date(mostRecentLogOfSuccess.date)
   const currentTime = new Date()
-  const diff = (currentTime - lastLogEntryDate) / 1000 / 60
-  return diff < treshold
+  const agoMinutes = (currentTime - dateOfSuccess) / 1000 / 60
+  const agoMinutesRounded = Math.ceil(agoMinutes)
+
+  return agoMinutesRounded < treshold
 }
