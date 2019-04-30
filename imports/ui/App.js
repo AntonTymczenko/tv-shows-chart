@@ -49,6 +49,9 @@ App.propTypes = {
   shows: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default withTracker(() => ({
-  shows: Shows.find({}, { limit: 20, sort: { rating: -1 } }).fetch(),
-}))(App);
+export default withTracker(() => {
+  Meteor.subscribe('shows')
+  return {
+    shows: Shows.find({}, { limit: 20, sort: { rating: -1 } }).fetch(),
+  }
+})(App);

@@ -1,3 +1,12 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-export default new Mongo.Collection('shows');
+const Shows = new Mongo.Collection('shows');
+
+if (Meteor.isServer) {
+  Meteor.publish('shows', function () {
+    return Shows.find()
+  });
+}
+
+export default Shows
