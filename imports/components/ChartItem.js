@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import IMDBLink from './links/IMDBLink';
 
+import { chartFields } from '/imports/constants';
+
 const renderSpecialCell = ({ slug }, show) => {
   switch (slug) {
     case 'ids.imdb':
@@ -14,7 +16,7 @@ const renderSpecialCell = ({ slug }, show) => {
   }
 }
 
-const ChartItem = ({ show, chartFields }) => (
+const ChartItem = ({ show }) => (
   <tr>
     { chartFields.map(field => (
       <td key={field.slug}>{

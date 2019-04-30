@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 
-import ChartItem from '/imports/components/ChartItem'
-import { Shows } from '/imports/api/collections';
 import { chartFields } from '/imports/constants';
+import ChartList from '/imports/components/ChartList'
+import Pagination from '/imports/components/Pagination'
 
 const updateDB = () => {
   Meteor.call('updateDatabase')
 }
 
 class App extends Component {
+  state = {
+    page: 1,
+    limit: 10,
+    sort: { rating: -1 },
+  }
+
   render() {
     return (
       <div>
@@ -30,28 +35,18 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.props.shows.length ? this.props.shows.map(show => (
-                <ChartItem
-                  show={show}
-                  key={show._id}
-                  chartFields={chartFields}
-                />
-              )) : null }
+              <ChartList
+                sort={this.state.sort}
+                page={this.state.page}
+                limit={this.state.limit}
+              />
             </tbody>
           </table>
+          <Pagination limit={this.state.limit}/>
         </main>
       </div>
     )
   }
 }
 
-App.propTypes = {
-  shows: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
-
-export default withTracker(() => {
-  Meteor.subscribe('shows')
-  return {
-    shows: Shows.find({}, { limit: 20, sort: { rating: -1 } }).fetch(),
-  }
-})(App);
+export default App
