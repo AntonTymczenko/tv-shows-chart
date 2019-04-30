@@ -20,7 +20,8 @@
     "meteor-node-stubs": "^0.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.5.0",
-    "react-dom": "^16.5.0"
+    "react-dom": "^16.5.0",
+    "react-paginate": "^6.3.0"
   },
   "meteor": {
     "mainModule": {
