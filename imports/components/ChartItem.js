@@ -26,7 +26,7 @@ const ChartItem = ({ show, chartFields }) => (
 
 ChartItem.propTypes = {
   show: PropTypes.shape({
-    rating: PropTypes.number.isRequired,
+    watchers: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 };
