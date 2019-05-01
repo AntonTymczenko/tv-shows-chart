@@ -12,6 +12,26 @@ class ChartList extends Component {
     this.props.dispatch(setCurrentPage(this.props.page))
   }
 
+  componentDidUpdate(prevProps) {
+    const { page, totalCount, limit, pageMax } = this.props
+    const pageIndexIsPossible = page <= pageMax
+    const pageIndexHasChanged = page !== prevProps.page
+
+
+    const currentPageFirstIndex = page * limit
+    const currentPageLastIndex = ((page + 1) * limit) - 1
+    const maxIndex = totalCount - 1
+
+    const shownCount = currentPageFirstIndex + this.props.shows.length
+    const updatedDataHasImpactOnCurrentPage = shownCount < totalCount &&
+      maxIndex <= currentPageLastIndex || (maxIndex > currentPageLastIndex && shownCount !== limit)
+
+    const OKToUpdate = pageIndexIsPossible &&
+      pageIndexHasChanged ||
+      updatedDataHasImpactOnCurrentPage
+    if (OKToUpdate) this.props.dispatch(setCurrentPage(this.props.page))
+  }
+
   render() {
     return this.props.shows.length ? this.props.shows.map(show => (
       <ChartItem
