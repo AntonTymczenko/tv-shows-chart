@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 
+import configureStore from '/imports/store'
 import { chartFields } from '/imports/constants';
 import ChartList from '/imports/components/ChartList'
 import Pagination from '/imports/components/Pagination'
@@ -9,6 +11,8 @@ import Pagination from '/imports/components/Pagination'
 const updateDB = () => {
   Meteor.call('updateDatabase')
 }
+
+const store = configureStore()
 
 class App extends Component {
   state = {
@@ -49,4 +53,10 @@ class App extends Component {
   }
 }
 
-export default App
+const withProvider = WrappedComponent => props => (
+  <Provider store={store}>
+    <WrappedComponent {...props} />
+  </Provider>
+)
+
+export default withProvider(App)
