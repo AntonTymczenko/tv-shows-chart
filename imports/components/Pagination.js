@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
+import { setTotalShowsCount } from '/imports/actions/shows';
 import { Shows } from '/imports/api/collections';
 import ReactPaginate from 'react-paginate';
 
@@ -31,6 +32,9 @@ export default connect(mapStateToProps)(withTracker(props => {
 
   const count = Shows.find().count()
 
+  props.dispatch(setTotalShowsCount(
+    count
+  ))
 
   return {
     ...props,
