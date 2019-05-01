@@ -15,12 +15,6 @@ const updateDB = () => {
 const store = configureStore()
 
 class App extends Component {
-  state = {
-    page: 1,
-    limit: 10,
-    sort: { rating: -1 },
-  }
-
   render() {
     return (
       <div>
@@ -39,14 +33,10 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              <ChartList
-                sort={this.state.sort}
-                page={this.state.page}
-                limit={this.state.limit}
-              />
+              <ChartList />
             </tbody>
           </table>
-          <Pagination limit={this.state.limit}/>
+          <Pagination/>
         </main>
       </div>
     )
