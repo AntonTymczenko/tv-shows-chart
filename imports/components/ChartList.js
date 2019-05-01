@@ -4,9 +4,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { Shows } from '/imports/api/collections';
+import { setCurrentPage } from '/imports/actions/shows';
 import ChartItem from './ChartItem'
 
 class ChartList extends Component {
+  componentDidMount() {
+    this.props.dispatch(setCurrentPage(this.props.page))
+  }
+
   render() {
     return this.props.shows.length ? this.props.shows.map(show => (
       <ChartItem

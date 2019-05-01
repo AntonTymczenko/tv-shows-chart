@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import { setTotalShowsCount } from '/imports/actions/shows';
+import { setTotalShowsCount, setCurrentPage } from '/imports/actions/shows';
 import { Shows } from '/imports/api/collections';
 import ReactPaginate from 'react-paginate';
 
-const Pagination = ({ pageCount }) => (
+const Pagination = ({ pageCount, dispatch }) => (
   <ReactPaginate
     previousLabel={'previous'}
     nextLabel={'next'}
@@ -16,7 +16,7 @@ const Pagination = ({ pageCount }) => (
     pageCount={pageCount}
     marginPagesDisplayed={2}
     pageRangeDisplayed={5}
-    onPageChange={data => {console.log(data)}}
+    onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
     containerClassName={'pagination'}
     subContainerClassName={'pages pagination'}
     activeClassName={'active'}
