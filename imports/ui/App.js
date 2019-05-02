@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 
 import configureStore from '/imports/store'
-import { chartFields } from '/imports/constants';
+import ChartHead from '/imports/components/ChartHead'
 import ChartList from '/imports/components/ChartList'
 import Pagination from '/imports/components/Pagination'
 import './App.styl'
@@ -27,11 +27,7 @@ class App extends Component {
           <button onClick={updateDB}>UPDATE</button>
           <table>
             <thead>
-              <tr>
-                { chartFields.map(field => (
-                  <th key={field.slug}>{ field.name }</th>
-                ))}
-              </tr>
+              <ChartHead />
             </thead>
             <tbody>
               <ChartList />
