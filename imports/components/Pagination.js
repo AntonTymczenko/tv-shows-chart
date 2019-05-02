@@ -7,7 +7,7 @@ import { setTotalShowsCount, setCurrentPage, setLimit } from '/imports/actions/s
 import { Shows } from '/imports/api/collections';
 import ReactPaginate from 'react-paginate';
 
-const Pagination = ({ limit, pageCount, dispatch }) => (
+const Pagination = ({ limit, page, pageCount, dispatch }) => (
   <div className="pagination">
     <select value={limit} onChange={e => dispatch(setLimit(parseInt(e.target.value))) }>
       <option value="10">10</option>
@@ -19,6 +19,7 @@ const Pagination = ({ limit, pageCount, dispatch }) => (
       nextLabel={'next'}
       breakLabel={'...'}
       breakClassName={'break-me'}
+      forcePage={page}
       pageCount={pageCount}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
@@ -31,6 +32,7 @@ const Pagination = ({ limit, pageCount, dispatch }) => (
 
 const mapStateToProps = (state, props) => ({
   limit: state.shows.limit,
+  page: state.shows.page,
   pageCount: state.shows.pageMax + 1,
 })
 
