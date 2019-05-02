@@ -12,15 +12,12 @@ const showsReducerDefault = {
 export default (shows = showsReducerDefault, action) => {
   switch (action.type) {
     case 'SET_TOTAL_SHOWS_COUNT':
-      const { totalCount } = action
-      const pageMax = Math.floor(totalCount / shows.limit)
       return {
         ...shows,
-        totalCount,
-        pageMax,
+        totalCount: action.totalCount,
+        pageMax: Math.floor(action.totalCount / shows.limit),
       }
     case 'SET_CURRENT_PAGE':
-      const { page } = action
       const { limit, sort } = shows
       const skip = limit * page
 
@@ -32,8 +29,8 @@ export default (shows = showsReducerDefault, action) => {
 
       return {
         ...shows,
-        page,
         data,
+        page: action.page,
       }
     default:
       return shows
