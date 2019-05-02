@@ -7,6 +7,7 @@ import configureStore from '/imports/store'
 import { chartFields } from '/imports/constants';
 import ChartList from '/imports/components/ChartList'
 import Pagination from '/imports/components/Pagination'
+import './App.styl'
 
 const updateDB = () => {
   Meteor.call('updateDatabase')

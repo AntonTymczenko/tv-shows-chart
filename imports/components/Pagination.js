@@ -8,7 +8,7 @@ import { Shows } from '/imports/api/collections';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ limit, pageCount, dispatch }) => (
-  <div>
+  <div className="pagination">
     <select value={limit} onChange={e => dispatch(setLimit(parseInt(e.target.value))) }>
       <option value="10">10</option>
       <option value="20">20</option>
@@ -23,7 +23,6 @@ const Pagination = ({ limit, pageCount, dispatch }) => (
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
-      containerClassName={'pagination'}
       subContainerClassName={'pages pagination'}
       activeClassName={'active'}
     />
