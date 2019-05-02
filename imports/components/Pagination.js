@@ -47,5 +47,6 @@ export default connect(mapStateToProps)(withTracker(props => {
 
   return {
     ...props,
+    loading: !handle.ready()
   }
 })(Pagination));
