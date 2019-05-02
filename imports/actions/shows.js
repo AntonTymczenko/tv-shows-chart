@@ -1,5 +1,19 @@
 import { Shows } from '/imports/api/collections';
 
+export const setLimit = (limitPerPage = 20) => {
+  return dispatch => {
+    const limit = parseInt(limitPerPage)
+    if (isNaN(limit)) {
+      // TODO: some error
+    } else {
+      dispatch({
+        type: 'SET_LIMIT',
+        limit,
+      })
+      dispatch(setCurrentPage(0))
+    }
+  }
+}
 
 export const setTotalShowsCount = (totalCount = 0) => {
   return (dispatch, getState) => {

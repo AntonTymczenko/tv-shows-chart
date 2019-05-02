@@ -3,27 +3,35 @@ import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import { setTotalShowsCount, setCurrentPage } from '/imports/actions/shows';
+import { setTotalShowsCount, setCurrentPage, setLimit } from '/imports/actions/shows';
 import { Shows } from '/imports/api/collections';
 import ReactPaginate from 'react-paginate';
 
-const Pagination = ({ pageCount, dispatch }) => (
-  <ReactPaginate
-    previousLabel={'previous'}
-    nextLabel={'next'}
-    breakLabel={'...'}
-    breakClassName={'break-me'}
-    pageCount={pageCount}
-    marginPagesDisplayed={2}
-    pageRangeDisplayed={5}
-    onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
-    containerClassName={'pagination'}
-    subContainerClassName={'pages pagination'}
-    activeClassName={'active'}
-  />
+const Pagination = ({ limit, pageCount, dispatch }) => (
+  <div>
+    <select value={limit} onChange={e => dispatch(setLimit(parseInt(e.target.value))) }>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="40">40</option>
+    </select>
+    <ReactPaginate
+      previousLabel={'previous'}
+      nextLabel={'next'}
+      breakLabel={'...'}
+      breakClassName={'break-me'}
+      pageCount={pageCount}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
+  </div>
 )
 
 const mapStateToProps = (state, props) => ({
+  limit: state.shows.limit,
   pageCount: state.shows.pageMax + 1,
 })
 

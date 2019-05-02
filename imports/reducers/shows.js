@@ -15,6 +15,12 @@ export default (shows = showsReducerDefault, action) => {
         totalCount: action.totalCount,
         pageMax: Math.floor(action.totalCount / shows.limit),
       }
+    case 'SET_LIMIT':
+      return {
+        ...shows,
+        limit: action.limit,
+        pageMax: Math.floor(shows.totalCount / action.limit),
+      }
     case 'SET_CURRENT_PAGE':
       return {
         ...shows,
