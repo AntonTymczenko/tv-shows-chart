@@ -48,7 +48,6 @@ const fetchCurrentPage = () => {
       skip: limit * page,
       limit,
     }).fetch()
-    // console.log('fetched page ', page , 'length:', data.length)
 
     dispatch ({
       type: 'FETCH_CURRENT_PAGE',
@@ -79,19 +78,32 @@ const setSortOrder = (slug, order) => {
   }
 }
 
+const getFullSortingField = slug =>
+  chartFields.find(field => field.slug === slug)
+
+const getDistructuredSort = sortObj => {
+  const type = Object.keys(sortObj)[0]
+  const order = sortObj[type]
+  return {
+    type,
+    order,
+  }
+}
+
 export const handleSortChange = (slug) => {
   return (dispatch, getState) => {
-    const foundField = chartFields.find(field => field.slug === slug)
-    const isLegitSlug = foundField.sortable
+    const field = getFullSortingField(slug)
+    const isLegitSlug = field && field.sortable
     if (!isLegitSlug) {
       dispatch(showError(`Sorting slug ${slug} not found in sortable 'chartFields'`))
     } else {
-      const currentSort = getState().shows.sort
-      const currentSortType = Object.keys(currentSort)[0]
-      const theSame = currentSortType === slug
-      const currentSortOrder = currentSort[currentSortType]
-      const order = theSame ? currentSortOrder * -1 : -1
-      dispatch(setSortOrder(slug, order))
+      const { type, order } = getDistructuredSort(getState().shows.sort)
+      const theSame = type === slug
+
+      const defaultOrder = field && field.reverse ? -1 : 1
+      
+      const newOrder = theSame ? order * -1 : defaultOrder
+      dispatch(setSortOrder(slug, newOrder))
     }
   }
 }

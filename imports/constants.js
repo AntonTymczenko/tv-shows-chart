@@ -2,6 +2,7 @@ const chartFields = [
   {
     name: 'Watchers',
     slug: 'watchers',
+    reverse: true,
     sortable: true,
   }, {
     name: 'Title',
