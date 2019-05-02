@@ -18,13 +18,16 @@
     "@babel/runtime": "^7.3.4",
     "lodash": "^4.17.11",
     "meteor-node-stubs": "^0.4.1",
+    "postcss": "^7.0.14",
+    "postcss-load-config": "^1.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-paginate": "^6.3.0",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "stylus": "^0.54.5"
   },
   "meteor": {
     "mainModule": {
