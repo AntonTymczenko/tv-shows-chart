@@ -20,6 +20,11 @@ export default (shows = showsReducerDefault, action) => {
         ...shows,
         page: action.page,
       }
+    case 'FETCH_CURRENT_PAGE':
+      return {
+        ...shows,
+        data: action.data,
+      }
     default:
       return shows
   }
