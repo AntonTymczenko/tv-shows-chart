@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import IMDBLink from './links/IMDBLink';
 
+import IMDBLink from './links/IMDBLink';
 import { chartFields } from '/imports/constants';
 
 const renderSpecialCell = ({ slug }, show) => {
