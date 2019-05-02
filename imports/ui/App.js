@@ -10,7 +10,7 @@ import Pagination from '/imports/components/Pagination'
 import './App.styl'
 
 const updateDB = () => {
-  Meteor.call('updateDatabase')
+  Meteor.call('updateDatabaseOnDemand')
 }
 
 const store = configureStore()

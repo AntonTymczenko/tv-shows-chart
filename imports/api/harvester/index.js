@@ -31,7 +31,8 @@ const updateEvery = period => {
 const UPDATE_PERIOD = parseInt(process.env.UPDATE_PERIOD) || 1440 // in minutes
 
 Meteor.methods({
-  updateDatabase() {
+  updateDatabaseOnDemand() {
+    // TODO: add option of update only current page
     updateOnce(undefined, { manual: true })
   }
 })
