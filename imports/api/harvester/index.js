@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import updatedLessThanMinutes from './updated-recently'
 import updateDatabase from './update-database'
 
-async function updateOnce(period = 0, { manual = false } = {}) {
+const updateOnce = (period = 0, { manual = false } = {}) => {
   const goUpdate = ({ manual }) => {
     updateDatabase({ manual }, err => {
       if (err) {
@@ -16,7 +16,7 @@ async function updateOnce(period = 0, { manual = false } = {}) {
   if (manual) {
     goUpdate({ manual })
   } else {
-    const updatedRecently = await updatedLessThanMinutes(period)
+    const updatedRecently = updatedLessThanMinutes(period)
     if (!updatedRecently) {
       goUpdate({ manual })
     }
