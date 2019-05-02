@@ -1,7 +1,7 @@
 import { Shows } from '/imports/api/collections';
 
 const showsReducerDefault = {
-  sort: { rating: -1 },
+  sort: { watchers: -1 },
   limit: 20,
   totalCount: 0,
   pageMax: -1,
