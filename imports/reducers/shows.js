@@ -1,5 +1,3 @@
-import { Shows } from '/imports/api/collections';
-
 const showsReducerDefault = {
   sort: { watchers: -1 },
   limit: 20,
@@ -18,18 +16,8 @@ export default (shows = showsReducerDefault, action) => {
         pageMax: Math.floor(action.totalCount / shows.limit),
       }
     case 'SET_CURRENT_PAGE':
-      const { limit, sort } = shows
-      const skip = limit * page
-
-      const data = Shows.find({}, {
-        sort,
-        skip,
-        limit,
-      }).fetch()
-
       return {
         ...shows,
-        data,
         page: action.page,
       }
     default:
