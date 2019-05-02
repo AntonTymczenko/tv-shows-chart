@@ -3,10 +3,7 @@ import { chartFields } from '/imports/constants';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-const handleSortChange = slug => {
-  console.log(slug)
-}
-
+import { handleSortChange } from '/imports/actions/shows';
 
 const sortClasses = (field, stateSort) => {
   const currentSortType = Object.keys(stateSort)[0]
@@ -23,7 +20,7 @@ const ChartHead = props => (
       <th
         key={field.slug}
         className={ sortClasses(field, props.sort) }
-        onClick={() => handleSortChange(field.slug)}
+        onClick={() => field.sortable && props.dispatch(handleSortChange(field.slug))}
       >{ field.name }</th>
     ))}
   </tr>

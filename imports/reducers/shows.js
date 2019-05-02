@@ -9,6 +9,11 @@ const showsReducerDefault = {
 
 export default (shows = showsReducerDefault, action) => {
   switch (action.type) {
+    case 'SET_SORT_TYPE':
+      return {
+        ...shows,
+        sort: action.sort,
+      }
     case 'SET_TOTAL_SHOWS_COUNT':
       return {
         ...shows,

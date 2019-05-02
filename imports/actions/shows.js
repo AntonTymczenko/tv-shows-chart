@@ -1,4 +1,5 @@
 import { Shows } from '/imports/api/collections';
+import { chartFields } from '/imports/constants';
 
 const showError = (msg = 'Unknown error in actions') => ({
   type: 'ERROR',
@@ -38,7 +39,7 @@ export const setTotalShowsCount = (totalCount = 0) => {
   }
 }
 
-export const fetchCurrentPage = () => {
+const fetchCurrentPage = () => {
   return (dispatch, getState) => {
     const { sort, page, limit } = getState().shows
 
@@ -63,5 +64,34 @@ export const setCurrentPage = (page = 0) => {
       page,
     })
     dispatch(fetchCurrentPage())
+  }
+}
+
+const setSortOrder = (slug, order) => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_SORT_TYPE',
+      sort: {
+        [slug]: order,
+      },
+    })
+    dispatch(setCurrentPage(0))
+  }
+}
+
+export const handleSortChange = (slug) => {
+  return (dispatch, getState) => {
+    const foundField = chartFields.find(field => field.slug === slug)
+    const isLegitSlug = foundField.sortable
+    if (!isLegitSlug) {
+      dispatch(showError(`Sorting slug ${slug} not found in sortable 'chartFields'`))
+    } else {
+      const currentSort = getState().shows.sort
+      const currentSortType = Object.keys(currentSort)[0]
+      const theSame = currentSortType === slug
+      const currentSortOrder = currentSort[currentSortType]
+      const order = theSame ? currentSortOrder * -1 : -1
+      dispatch(setSortOrder(slug, order))
+    }
   }
 }
