@@ -31,6 +31,8 @@ export default (shows = showsReducerDefault, action) => {
         ...shows,
         data: action.data,
       }
+    case 'ERROR':
+      console.error(action.msg)
     default:
       return shows
   }

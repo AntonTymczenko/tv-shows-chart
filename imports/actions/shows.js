@@ -1,10 +1,15 @@
 import { Shows } from '/imports/api/collections';
 
+const showError = (msg = 'Unknown error in actions') => ({
+  type: 'ERROR',
+  msg,
+})
+
 export const setLimit = (limitPerPage = 20) => {
   return dispatch => {
     const limit = parseInt(limitPerPage)
     if (isNaN(limit)) {
-      // TODO: some error
+      dispatch(showError('Limit per page should be an integer'))
     } else {
       dispatch({
         type: 'SET_LIMIT',
