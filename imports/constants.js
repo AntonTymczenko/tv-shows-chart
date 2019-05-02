@@ -1,13 +1,16 @@
 const chartFields = [
   {
     name: 'Watchers',
-    slug: 'watchers'
+    slug: 'watchers',
+    sortable: true,
   }, {
     name: 'Title',
-    slug: 'title'
+    slug: 'title',
+    sortable: true,
   }, {
     name: 'Year',
-    slug: 'year'
+    slug: 'year',
+    sortable: true,
   }, {
     name: 'IMDB',
     slug: 'ids.imdb'
