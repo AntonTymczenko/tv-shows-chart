@@ -26,6 +26,15 @@ export const setTotalShowsCount = (totalCount = 0) => {
       type: 'SET_TOTAL_SHOWS_COUNT',
       totalCount,
     })
+    const { page, limit, data } = getState().shows
+    const currentPageFirstIndex = page * limit
+    const currentPageLastIndex = ((page + 1) * limit) - 1
+    const maxIndex = totalCount - 1
+    const updatedDataHasImpactOnCurrentPage =
+      maxIndex >= currentPageFirstIndex && maxIndex <= currentPageLastIndex ||
+      maxIndex > currentPageLastIndex && data.length !== limit
+
+    if (updatedDataHasImpactOnCurrentPage) dispatch(fetchCurrentPage())
   }
 }
 
@@ -38,6 +47,7 @@ export const fetchCurrentPage = () => {
       skip: limit * page,
       limit,
     }).fetch()
+    // console.log('fetched page ', page , 'length:', data.length)
 
     dispatch ({
       type: 'FETCH_CURRENT_PAGE',
