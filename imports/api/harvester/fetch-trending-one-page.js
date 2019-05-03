@@ -1,15 +1,9 @@
 import { HTTP } from 'meteor/http';
 import saveOneShow from './save-one'
-
-const { TRAKT_CLIENT_ID } = process.env
+import headers from './http-headers';
 
 export default (page, limit) => new Promise((resolve, reject) => {
   const url = 'https://api.trakt.tv/shows/trending'
-  const headers = {
-    'Content-type': 'application/json',
-    'trakt-api-key': TRAKT_CLIENT_ID,
-    'trakt-api-version': 2,
-  }
 
   const query = `page=${page}&limit=${limit}`
 
