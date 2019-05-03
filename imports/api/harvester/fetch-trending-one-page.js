@@ -1,5 +1,6 @@
 import { HTTP } from 'meteor/http';
 import saveOneShow from './save-one'
+import fetchOneShowSummary from './fetch-one-show-summary';
 import headers from './http-headers';
 
 export default (page, limit) => new Promise((resolve, reject) => {
@@ -22,13 +23,22 @@ export default (page, limit) => new Promise((resolve, reject) => {
 
     Promise.all(toSave.map(show => saveOneShow(show)))
     .then(res => {
-      const inserted = res.reduce((acc, i) => i ? acc + 1 : acc, 0)
-      resolve({
+      const inserted = res.reduce((acc, show) => show._id ? acc.concat(show) : acc, [])
+      const result = {
         status: 200,
-        inserted,
-        updated: toSave.length - inserted,
+        updated: toSave.length - inserted.length,
+        inserted: inserted.length,
         pagesTotal,
-      })
+      }
+      if (inserted.length) {
+        Promise.all(inserted.map(show => fetchOneShowSummary(show)))
+        .then(res => {
+          return resolve(result)
+        })
+        .catch(err => reject(err))
+      } else {
+        return resolve(result)
+      }
     })
     .catch(err => reject(err))
   })

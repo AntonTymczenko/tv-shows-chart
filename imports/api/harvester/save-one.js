@@ -6,7 +6,10 @@ export default show => new Promise((resolve, reject) => {
     { $set: show},
     { upsert: true },
     (err, { numberAffected, insertedId }) => {
-      resolve(insertedId)
+      resolve({
+        _id: insertedId,
+        ids: show.ids,
+      })
       if (err) return reject(err)
     }
   )
