@@ -9,7 +9,12 @@ import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ limit, page, pageCount, dispatch }) => (
   <div className="pagination">
-    <select value={limit} onChange={e => dispatch(setLimit(parseInt(e.target.value))) }>
+    <label htmlFor="per-page-select">Per page</label>
+    <select
+      id="per-page-select"
+      value={limit}
+      onChange={e => dispatch(setLimit(parseInt(e.target.value))) }
+    >
       <option value="10">10</option>
       <option value="20">20</option>
       <option value="40">40</option>
