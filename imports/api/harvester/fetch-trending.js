@@ -7,7 +7,7 @@ export default new Promise(async(resolve, reject) => {
       const firstPageResult = await fetchTrendingOnePage(1, limit)
       const { pagesTotal } = firstPageResult
 
-      if (pagesTotal <= 1) {
+      if (isNaN(pagesTotal) || pagesTotal <= 1) {
         resolve(firstPageResult)
       } else {
         // fetch other pages

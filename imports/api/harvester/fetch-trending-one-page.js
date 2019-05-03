@@ -14,7 +14,10 @@ export default (page, limit) => new Promise((resolve, reject) => {
   const query = `page=${page}&limit=${limit}`
 
   HTTP.get(url, { headers, query }, (err, res) => {
-    if (err) resolve(err)
+    if (err) return resolve({
+      ...err,
+      status: err.response && err.response.statusCode || 500,
+    })
 
     const pagesTotal = res.headers['x-pagination-page-count']
 

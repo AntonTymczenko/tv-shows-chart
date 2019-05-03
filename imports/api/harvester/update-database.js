@@ -12,8 +12,8 @@ export default async ({ manual }, cb) => {
       manual,
       date: new Date(),
     }, (err, id) => {
-      if (err) throw err
-      if (res.status !== 200) throw new Error(errMsg(id))
+      if (err) return cb(err)
+      if (res.status !== 200) return cb(new Error(errMsg(id)))
       return cb()
     });
   } catch(err) {

@@ -8,7 +8,7 @@ const updateOnce = (period = 0, { manual = false } = {}) => {
       if (err) {
         console.error(err.message || err)
         console.error('Will retry to update in 1 minute')
-        Meteor.setTimeout(updateOnce, 60000)
+        Meteor.setTimeout(() => goUpdate({ manual }), 60000)
       }
     })
   }
