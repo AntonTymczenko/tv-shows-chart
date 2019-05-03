@@ -3,9 +3,7 @@ import updatedLessThanMinutes from './updated-recently'
 import updateDatabase from './update-database'
 
 const updateOnce = ({ period = 0, manual = false } = {}) => {
-  if (manual) {
-    updateDatabase({ manual })
-  } else if (!updatedLessThanMinutes(period)) {
+  if (manual || !updatedLessThanMinutes(period)) {
     updateDatabase({ manual })
   }
 }
