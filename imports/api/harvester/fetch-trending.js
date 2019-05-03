@@ -1,7 +1,7 @@
 import fetchTrendingOnePage from './fetch-trending-one-page'
 
-export default new Promise(async(resolve, reject) => {
     const limit = 20
+export default () => new Promise(async(resolve, reject) => {
     try {
       // fetch first page
       const firstPageResult = await fetchTrendingOnePage(1, limit)

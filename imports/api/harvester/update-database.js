@@ -5,7 +5,7 @@ const errMsg = id => `Unsuccessful DB update. Read more in log entry ${id}`
 
 export default async ({ manual }, cb) => {
   try {
-    const res = await fetchTrending
+    const res = await fetchTrending()
 
     LogEntries.insert({
       ...res,
