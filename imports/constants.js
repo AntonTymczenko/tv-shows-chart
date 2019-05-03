@@ -5,6 +5,11 @@ const chartFields = [
     reverse: true,
     sortable: true,
   }, {
+    name: 'Rating',
+    slug: 'rating',
+    reverse: true,
+    sortable: true,
+  }, {
     name: 'Title',
     slug: 'title',
     sortable: true,
