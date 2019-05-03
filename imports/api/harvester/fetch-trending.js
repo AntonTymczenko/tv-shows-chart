@@ -15,14 +15,12 @@ export default () => new Promise(async(resolve, reject) => {
         for (let i = 2; i <= pagesTotal; i++) {
           requests.push(fetchTrendingOnePage(i, limit))
         }
-        Promise.all(requests)
-        .then(res => {
-          resolve(res.reduce((acc, r) => ({
-            status : r.status === 200 ? 200 : acc.status || 200,
-            updated : r.updated + (acc.updated || 0 ),
-            inserted : r.inserted + (acc.inserted || 0 ),
-          }), {}))
-        })
+        const res = await Promise.all(requests)
+        resolve(res.reduce((acc, r) => ({
+          status : r.status === 200 ? 200 : acc.status || 200,
+          updated : r.updated + (acc.updated || 0 ),
+          inserted : r.inserted + (acc.inserted || 0 ),
+        }), {}))
       }
 
     } catch (err) {
