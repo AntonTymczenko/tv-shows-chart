@@ -39,7 +39,7 @@ export const setTotalShowsCount = (totalCount = 0) => {
   }
 }
 
-const fetchCurrentPage = () => {
+export const fetchCurrentPage = () => {
   return (dispatch, getState) => {
     const { sort, page, limit } = getState().shows
 
@@ -101,7 +101,7 @@ export const handleSortChange = (slug) => {
       const theSame = type === slug
 
       const defaultOrder = field && field.reverse ? -1 : 1
-      
+
       const newOrder = theSame ? order * -1 : defaultOrder
       dispatch(setSortOrder(slug, newOrder))
     }
