@@ -1,11 +1,11 @@
 import { HTTP } from 'meteor/http';
 import saveOneShow from './save-one'
 import fetchOneShowSummary from './fetch-one-show-summary';
-import headers from './http-headers';
+import httpHeaders from './http-headers';
 
 export default (page, limit) => new Promise((resolve, reject) => {
   const url = 'https://api.trakt.tv/shows/trending'
-
+  const headers = httpHeaders.trakt
   const query = `page=${page}&limit=${limit}`
 
   HTTP.get(url, { headers, query }, (err, res) => {

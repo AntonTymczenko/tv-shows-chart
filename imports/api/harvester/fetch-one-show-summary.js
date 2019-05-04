@@ -1,6 +1,6 @@
 import { HTTP } from 'meteor/http';
 
-import headers from './http-headers';
+import httpHeaders from './http-headers';
 import { Shows } from '/imports/api/collections';
 
 const errMsg = id => `Error trying to update summary of show TraktID=${id}`
@@ -8,6 +8,7 @@ const errMsg = id => `Error trying to update summary of show TraktID=${id}`
 export default ({ _id, ids }) => new Promise((resolve, reject) => {
   const url = `https://api.trakt.tv/shows/${ids.trakt}`
 
+  const headers = httpHeaders.trakt
   const query = 'extended=full'
 
   HTTP.get(url, { headers, query }, (err, res) => {
