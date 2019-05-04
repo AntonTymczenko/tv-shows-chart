@@ -21,8 +21,8 @@ const chartFields = [
     slug: 'year',
     sortable: true,
   }, {
-    name: 'IMDB',
-    slug: 'ids.imdb'
+    name: 'Links',
+    slug: 'links'
   }
 ]
 export {

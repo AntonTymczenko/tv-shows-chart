@@ -7,9 +7,9 @@ import { chartFields } from '/imports/constants';
 
 const renderSpecialCell = ({ slug }, show) => {
   switch (slug) {
-    case 'ids.imdb':
+    case 'links':
       return (
-        <IMDBLink id={_.get(show, slug)} />
+        <IMDBLink id={_.get(show, 'ids.imdb')} />
       )
     case 'poster':
       return show.poster_path ?
