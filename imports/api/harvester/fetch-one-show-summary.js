@@ -2,6 +2,7 @@ import { HTTP } from 'meteor/http';
 
 import httpHeaders from './http-headers';
 import { Shows } from '/imports/api/collections';
+import { worstResult } from './helpers';
 
 const { TMDB_KEY } = process.env
 
@@ -27,6 +28,7 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
     HTTP.get(url, { headers, query }, (err, res) => {
       if (err) return resolve({
         ...error,
+        request_url: url,
         response: err.response,
         status: err.response && err.response.statusCode || 500,
       })
@@ -36,7 +38,7 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
         { $set: res.data},
         (err, res) => {
           if (err || res !== 1) return reject(error)
-          resolve(_id)
+          resolve({ status: 200 })
         }
       )
     })
@@ -44,7 +46,8 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
 
   // TMDB additional info (poster, ...)
   const tmdbRequest = new Promise((resolve, reject) => {
-    if (!ids.tmdb) return resolve(_id)
+    const ok = { status: 200 }
+    if (!ids.tmdb) return resolve(ok)
     const url = `https://api.themoviedb.org/3/tv/${ids.tmdb}`
     const query = `api_key=${TMDB_KEY}`
     const error = new Error(errMsg(ids.tmdb, 'tmdb'))
@@ -52,6 +55,7 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
     HTTP.get(url, { query }, (err, res) => {
       if (err) return resolve({
         ...error,
+        request_url: url,
         response: err.response,
         status: err.response && err.response.statusCode || 500,
       })
@@ -64,13 +68,15 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
         { $set: toSave},
         (err, res) => {
           if (err || res !== 1) return reject(error)
-          resolve(_id)
+          resolve(ok)
         }
       )
     })
   })
 
   Promise.all([traktRequest, tmdbRequest])
-  .then(res => resolve(res[0]))
+  .then(res => {
+    resolve(worstResult(res))
+  })
   .catch(err => reject(err))
 })

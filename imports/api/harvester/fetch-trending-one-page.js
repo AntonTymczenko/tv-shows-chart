@@ -2,6 +2,7 @@ import { HTTP } from 'meteor/http';
 import saveOneShow from './save-one'
 import fetchOneShowSummary from './fetch-one-show-summary';
 import httpHeaders from './http-headers';
+import { worstResult } from './helpers';
 
 export default (page, limit) => new Promise((resolve, reject) => {
   const url = 'https://api.trakt.tv/shows/trending'
@@ -33,7 +34,10 @@ export default (page, limit) => new Promise((resolve, reject) => {
       if (inserted.length) {
         Promise.all(inserted.map(show => fetchOneShowSummary(show)))
         .then(res => {
-          return resolve(result)
+          return resolve({
+            ...result,
+            ...worstResult(res)
+          })
         })
         .catch(err => reject(err))
       } else {
