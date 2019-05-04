@@ -3,7 +3,17 @@ import { HTTP } from 'meteor/http';
 import httpHeaders from './http-headers';
 import { Shows } from '/imports/api/collections';
 
-const errMsg = id => `Error trying to update summary of show TraktID=${id}`
+const msgAPI = api => {
+  switch (api) {
+    case 'trakt':
+      return 'summary of a show via TraktID='
+    case 'tmdb':
+      return 'poster and other details via TMDB_ID='
+    default:
+      return 'unknown API '
+  }
+}
+const errMsg = (id, api) => `Error trying to update ${msgAPI(api)}${id}`
 
 export default ({ _id, ids }) => new Promise((resolve, reject) => {
   // Trakt summary
@@ -23,7 +33,7 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
       { $set: res.data},
       (err, res) => {
         if (err) return reject(err)
-        if (res !== 1) return reject(new Error(errMsg(ids.trakt)))
+        if (res !== 1) return reject(new Error(errMsg(ids.trakt, 'trakt')))
         resolve(_id)
       }
     )
