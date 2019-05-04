@@ -6,11 +6,12 @@ import { Shows } from '/imports/api/collections';
 const errMsg = id => `Error trying to update summary of show TraktID=${id}`
 
 export default ({ _id, ids }) => new Promise((resolve, reject) => {
-  const url = `https://api.trakt.tv/shows/${ids.trakt}`
+  // Trakt summary
+  const traktRequest = new Promise((resolve, reject) => {
 
+  const url = `https://api.trakt.tv/shows/${ids.trakt}`
   const headers = httpHeaders.trakt
   const query = 'extended=full'
-
   HTTP.get(url, { headers, query }, (err, res) => {
     if (err) return resolve({
       ...err,
@@ -27,4 +28,15 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
       }
     )
   })
+
+  })
+
+  // TMDB additional info (poster, ...)
+  const tmdbRequest = new Promise((resolve, reject) => {
+    resolve(_id)
+  })
+
+  Promise.all([traktRequest, tmdbRequest])
+  .then(res => resolve(res[0]))
+  .catch(err => reject(err))
 })
