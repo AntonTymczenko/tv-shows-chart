@@ -21,9 +21,11 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
     const url = `https://api.trakt.tv/shows/${ids.trakt}`
     const headers = httpHeaders.trakt
     const query = 'extended=full'
+    const error = new Error(errMsg(ids.trakt, 'trakt'))
     HTTP.get(url, { headers, query }, (err, res) => {
       if (err) return resolve({
-        ...err,
+        ...error,
+        response: err.response,
         status: err.response && err.response.statusCode || 500,
       })
 
@@ -31,8 +33,7 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
         { _id },
         { $set: res.data},
         (err, res) => {
-          if (err) return reject(err)
-          if (res !== 1) return reject(new Error(errMsg(ids.trakt, 'trakt')))
+          if (err || res !== 1) return reject(error)
           resolve(_id)
         }
       )
