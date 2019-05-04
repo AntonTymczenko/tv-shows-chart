@@ -4,14 +4,11 @@ import { Provider } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 
 import configureStore from '/imports/store'
+import Controls from '/imports/components/Controls'
 import ChartHead from '/imports/components/ChartHead'
 import ChartList from '/imports/components/ChartList'
 import Pagination from '/imports/components/Pagination'
 import './App.styl'
-
-const updateDB = () => {
-  Meteor.call('updateDatabaseOnDemand')
-}
 
 const store = configureStore()
 
@@ -24,7 +21,7 @@ class App extends Component {
         </header>
 
         <main>
-          <button onClick={updateDB}>UPDATE</button>
+          <Controls />
           <table>
             <thead>
               <ChartHead />
