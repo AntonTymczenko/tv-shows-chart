@@ -1,5 +1,8 @@
 const chartFields = [
   {
+    name: 'Poster',
+    slug: 'poster',
+  }, {
     name: 'Watchers',
     slug: 'watchers',
     reverse: true,

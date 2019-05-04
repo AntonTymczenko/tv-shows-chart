@@ -11,6 +11,10 @@ const renderSpecialCell = ({ slug }, show) => {
       return (
         <IMDBLink id={_.get(show, slug)} />
       )
+    case 'poster':
+      return show.poster_path ?
+        <img src={show.poster_path} />
+        : null
     default:
       return null
   }
