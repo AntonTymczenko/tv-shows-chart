@@ -17,6 +17,21 @@ tbody td
     height: 100%
   img.flag
     width: 1.5rem
+  .link
+    display: inline-block;
+    width: linkSize = 24px
+    height: linkSize
+    &:after
+      content: ""
+      background-size: contain
+      display: inline-block;
+      width: linkSize
+      height: linkSize
+      background-repeat: no-repeat
+    &.link_yt:after
+      background-image: url("/youtube.svg")
+    &.link_imdb:after
+      background-image: url("/imdb.png")
 
 .pagination
   ul, li

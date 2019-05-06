@@ -4,13 +4,23 @@ import _ from 'lodash';
 import countryFlagEmoji from "country-flag-emoji";
 
 import IMDBLink from './links/IMDBLink';
+import YTLink from './links/YTLink';
 import { chartFields } from '/imports/constants';
 
 const renderSpecialCell = (slug, show) => {
   switch (slug) {
     case 'links':
       return (
-        <IMDBLink id={_.get(show, 'ids.imdb')} />
+        <>
+          <IMDBLink
+            id={_.get(show, 'ids.imdb')}
+            title={show.title}
+          />
+          <YTLink
+            path={show.trailer}
+            title={show.title}
+          />
+        </>
       )
     case 'poster':
       return show.poster_path ?
