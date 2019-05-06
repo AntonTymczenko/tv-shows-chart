@@ -5,7 +5,7 @@ import _ from 'lodash';
 import IMDBLink from './links/IMDBLink';
 import { chartFields } from '/imports/constants';
 
-const renderSpecialCell = ({ slug }, show) => {
+const renderSpecialCell = (slug, show) => {
   switch (slug) {
     case 'links':
       return (
@@ -16,15 +16,15 @@ const renderSpecialCell = ({ slug }, show) => {
         <img src={show.poster_path} />
         : null
     default:
-      return null
+      return show[slug] || null
   }
 }
 
 const ChartItem = ({ show }) => (
   <tr>
-    { chartFields.map(field => (
-      <td key={field.slug}>{
-        show[field.slug] || renderSpecialCell(field, show)
+    { chartFields.map(({ slug }) => (
+      <td key={slug}>{
+        renderSpecialCell(slug, show)
       }</td>
     ))}
   </tr>
