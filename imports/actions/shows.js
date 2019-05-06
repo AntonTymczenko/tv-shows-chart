@@ -105,17 +105,49 @@ export const setSearchQueryText = query => ({
   query,
 })
 
-export const setSearchQueryObject = queryObj => ({
-  type: 'SET_SEARCH_QUERY_OBJ',
-  queryObj,
-})
+export const setSearchQueryObject = () => {
+  return (dispatch, getState) => {
+    const queryObj = {}
+    const title = getState().shows.query.trim()
+    if (title) {
+      const regex = new RegExp(title, 'i')
+      const { genres } = getState().shows.searchOptions
+      if (genres) {
+        queryObj['$or'] = [
+          { title: regex },
+          { genres: regex },
+        ]
+      } else {
+        queryObj.title = regex
+      }
+    }
+    dispatch({
+      type: 'SET_SEARCH_QUERY_OBJ',
+      queryObj,
+    })
+  }
+}
 
 export const setSearchQuery = query => {
   return (dispatch, getState) => {
     dispatch(setSearchQueryText(query))
-    const queryObj = {}
-    const title = getState().shows.query.trim()
-    if (title) queryObj.title = new RegExp(title, 'i')
-    dispatch(setSearchQueryObject(queryObj))
+
+    dispatch(setCurrentPage(0))
+    dispatch(setSearchQueryObject())
+  }
+}
+
+export const toggleSearchOption = name => {
+  return (dispatch, getState) => {
+    switch (name) {
+      case 'genres':
+        dispatch({
+          type: 'TOGGLE_SEARCH_OPTION_GENRES',
+        })
+        dispatch(setSearchQueryObject())
+        break;
+      default:
+        dispatch(showError(`No such search option ${name} to toggle in state`))
+    }
   }
 }

@@ -2,6 +2,9 @@ const showsReducerDefault = {
   sort: { watchers: -1 },
   query: '',
   queryObj: {},
+  searchOptions: {
+    genres: false,
+  },
   limit: 20,
   totalCount: 0,
   pageMax: 0,
@@ -47,6 +50,14 @@ export default (shows = showsReducerDefault, action) => {
       return {
         ...shows,
         queryObj: action.queryObj,
+      }
+    case 'TOGGLE_SEARCH_OPTION_GENRES':
+      return {
+        ...shows,
+        searchOptions: {
+          ...shows.searchOptions,
+          genres: !shows.searchOptions.genres,
+        }
       }
     case 'ERROR':
       console.error(action.msg)

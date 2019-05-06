@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Synchronizer from '/imports/components/Synchronizer'
-import { fetchCurrentPage, setSearchQuery } from '/imports/actions/shows';
+import { fetchCurrentPage, setSearchQuery, toggleSearchOption } from '/imports/actions/shows';
 
 const handleSearchChange = (dispatch, event) => {
   dispatch(setSearchQuery(event.target.value.trim))
@@ -22,12 +22,22 @@ const Controls = props => (
       }
     />
     <button>SEARCH</button>
+    <label htmlFor="">
+      <input
+        type="checkbox"
+        value={props.searchOptions.genres}
+        onChange={e => props.dispatch(toggleSearchOption('genres'))}
+        id="search-in-genres"
+      />
+      Search in genres too
+    </label>
     <Synchronizer />
   </form>
 )
 
 const mapStateToProps = (state, props) => ({
   query: state.shows.query,
+  searchOptions: state.shows.searchOptions,
 })
 
 export default connect(mapStateToProps)(Controls);
