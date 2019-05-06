@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 
-import { setTotalShowsCount, setCurrentPage, setLimit } from '/imports/actions/shows';
-import { Shows } from '/imports/api/collections';
+import { setCurrentPage, setLimit } from '/imports/actions/shows';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ limit, page, pageCount, dispatch }) => (
@@ -41,17 +38,4 @@ const mapStateToProps = (state, props) => ({
   pageCount: state.shows.pageMax + 1,
 })
 
-export default connect(mapStateToProps)(withTracker(props => {
-  const handle = Meteor.subscribe('shows')
-
-  const count = Shows.find().count()
-
-  props.dispatch(setTotalShowsCount(
-    count
-  ))
-
-  return {
-    ...props,
-    loading: !handle.ready()
-  }
-})(Pagination));
+export default connect(mapStateToProps)(Pagination);

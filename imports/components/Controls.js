@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Synchronizer from '/imports/components/Synchronizer'
 import { fetchCurrentPage, setSearchQuery } from '/imports/actions/shows';
 
 const handleSearchChange = (dispatch, event) => {
@@ -21,6 +22,7 @@ const Controls = props => (
       }
     />
     <button>SEARCH</button>
+    <Synchronizer />
   </form>
 )
 
