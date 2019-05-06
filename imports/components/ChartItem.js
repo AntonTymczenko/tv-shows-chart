@@ -34,6 +34,14 @@ const renderSpecialCell = (slug, show) => {
           alt={name}
         />
         : <span>{ show.country }</span>
+    case 'genresList':
+      if (!Array.isArray(show.genres) || !show.genres.length) return null
+      return (
+        <span>
+          {show.genres.reduce((acc, g, i) => acc + g + (i !== (show.genres.length - 1) ? ', ' : '')
+          ,'')}
+        </span>
+      )
     default:
       return show[slug] || null
   }

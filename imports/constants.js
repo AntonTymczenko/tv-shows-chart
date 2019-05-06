@@ -25,6 +25,9 @@ const chartFields = [
     slug: 'country',
     sortable: true,
   }, {
+    name: 'Genres',
+    slug: 'genresList',
+  }, {
     name: 'Links',
     slug: 'links'
   }
