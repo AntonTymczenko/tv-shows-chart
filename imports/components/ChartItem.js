@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import countryFlagEmoji from "country-flag-emoji";
 
 import IMDBLink from './links/IMDBLink';
 import { chartFields } from '/imports/constants';
@@ -21,6 +22,18 @@ const renderSpecialCell = (slug, show) => {
           Math.round(show.rating * 100) / 100
         }</span>
       )
+    case 'country':
+      if (!show.country) return null
+      const knownCountry = countryFlagEmoji.get(show.country)
+      const name = typeof knownCountry === 'object' && knownCountry.name
+      return name ?
+        <img
+          className="flag"
+          src={`https://flagpedia.net/data/flags/small/${show.country}.png`}
+          title={name}
+          alt={name}
+        />
+        : <span>{ show.country }</span>
     default:
       return show[slug] || null
   }

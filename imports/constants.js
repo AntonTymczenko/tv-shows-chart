@@ -21,6 +21,10 @@ const chartFields = [
     slug: 'year',
     sortable: true,
   }, {
+    name: 'Country',
+    slug: 'country',
+    sortable: true,
+  }, {
     name: 'Links',
     slug: 'links'
   }
