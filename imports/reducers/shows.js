@@ -4,7 +4,7 @@ const showsReducerDefault = {
   queryObj: {},
   limit: 20,
   totalCount: 0,
-  pageMax: -1,
+  pageMax: 0,
   page: 0,
   data: [],
 }
