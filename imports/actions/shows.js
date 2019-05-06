@@ -41,9 +41,9 @@ export const setTotalShowsCount = (totalCount = 0) => {
 
 export const fetchCurrentPage = () => {
   return (dispatch, getState) => {
-    const { sort, page, limit } = getState().shows
+    const { sort, page, limit, queryObj } = getState().shows
 
-    const data = Shows.find({}, {
+    const data = Shows.find(queryObj, {
       sort,
       skip: limit * page,
       limit,
@@ -105,5 +105,25 @@ export const handleSortChange = (slug) => {
       const newOrder = theSame ? order * -1 : defaultOrder
       dispatch(setSortOrder(slug, newOrder))
     }
+  }
+}
+
+export const setSearchQueryText = query => ({
+  type: 'SET_SEARCH_QUERY',
+  query,
+})
+
+export const setSearchQueryObject = queryObj => ({
+  type: 'SET_SEARCH_QUERY_OBJ',
+  queryObj,
+})
+
+export const setSearchQuery = query => {
+  return (dispatch, getState) => {
+    dispatch(setSearchQueryText(query))
+    const queryObj = {}
+    const title = getState().shows.query.trim()
+    if (title) queryObj.title = new RegExp(title, 'i')
+    dispatch(setSearchQueryObject(queryObj))
   }
 }

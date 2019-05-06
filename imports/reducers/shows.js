@@ -1,5 +1,7 @@
 const showsReducerDefault = {
   sort: { watchers: -1 },
+  query: '',
+  queryObj: {},
   limit: 20,
   totalCount: 0,
   pageMax: -1,
@@ -35,6 +37,16 @@ export default (shows = showsReducerDefault, action) => {
       return {
         ...shows,
         data: action.data,
+      }
+    case 'SET_SEARCH_QUERY':
+      return {
+        ...shows,
+        query: action.query,
+      }
+    case 'SET_SEARCH_QUERY_OBJ':
+      return {
+        ...shows,
+        queryObj: action.queryObj,
       }
     case 'ERROR':
       console.error(action.msg)
