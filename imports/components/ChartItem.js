@@ -13,7 +13,7 @@ const renderSpecialCell = (slug, show) => {
       )
     case 'poster':
       return show.poster_path ?
-        <img src={show.poster_path} />
+        <img className="poster" src={show.poster_path} />
         : null
     case 'rating':
       return (
