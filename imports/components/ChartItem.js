@@ -15,6 +15,12 @@ const renderSpecialCell = (slug, show) => {
       return show.poster_path ?
         <img src={show.poster_path} />
         : null
+    case 'rating':
+      return (
+        <span>{
+          Math.round(show.rating * 100) / 100
+        }</span>
+      )
     default:
       return show[slug] || null
   }
