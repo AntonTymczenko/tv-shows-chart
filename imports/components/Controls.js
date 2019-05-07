@@ -27,11 +27,22 @@ const Controls = props => (
       <span>
         Search in:
       </span>
+      <label htmlFor="search-in-title">
+        <input
+          id="search-in-title"
+          type="checkbox"
+          value={props.searchOptions.title}
+          checked={props.searchOptions.title}
+          onChange={e => props.dispatch(toggleSearchOption('title'))}
+        />
+        Title
+      </label>
       <label htmlFor="search-in-genres">
         <input
           id="search-in-genres"
           type="checkbox"
           value={props.searchOptions.genres}
+          checked={props.searchOptions.genres}
           onChange={e => props.dispatch(toggleSearchOption('genres'))}
         />
         Genres
@@ -41,6 +52,7 @@ const Controls = props => (
           id="search-in-overview"
           type="checkbox"
           value={props.searchOptions.overview}
+          checked={props.searchOptions.overview}
           onChange={e => props.dispatch(toggleSearchOption('overview'))}
         />
         Overview

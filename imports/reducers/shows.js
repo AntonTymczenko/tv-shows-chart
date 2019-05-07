@@ -3,6 +3,7 @@ const showsReducerDefault = {
   query: '',
   queryObj: {},
   searchOptions: {
+    title: true,
     genres: false,
     overview: false,
   },
@@ -51,6 +52,14 @@ export default (shows = showsReducerDefault, action) => {
       return {
         ...shows,
         queryObj: action.queryObj,
+      }
+    case 'TOGGLE_SEARCH_OPTION_TITLE':
+      return {
+        ...shows,
+        searchOptions: {
+          ...shows.searchOptions,
+          title: !shows.searchOptions.title,
+        }
       }
     case 'TOGGLE_SEARCH_OPTION_GENRES':
       return {

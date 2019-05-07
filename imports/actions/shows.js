@@ -108,16 +108,17 @@ export const setSearchQueryText = query => ({
 export const setSearchQueryObject = () => {
   return (dispatch, getState) => {
     const queryObj = {}
-    const title = getState().shows.query.trim()
-    if (title) {
-      const regex = new RegExp(title, 'i')
-      queryObj['$or'] = [{ title: regex }]
-
+    const trimmedQuery = getState().shows.query.trim()
+    if (trimmedQuery) {
+      const regex = new RegExp(trimmedQuery, 'i')
+      queryObj['$or'] = []
       const options = getState().shows.searchOptions
-      for (let optionKey in options) {
-        const optionValue = options[optionKey]
-        if (optionValue) queryObj['$or'].push({ [optionKey]: regex })
+      const optionKeysActive = Object.keys(options)
+        .filter(name => options[name])
+      for (let key of optionKeysActive) {
+        queryObj['$or'].push({ [key]: regex })
       }
+      if (!queryObj['$or'].length) delete queryObj['$or']
     }
     dispatch({
       type: 'SET_SEARCH_QUERY_OBJ',
@@ -137,14 +138,24 @@ export const setSearchQuery = query => {
 
 export const toggleSearchOption = name => {
   return (dispatch, getState) => {
+    const options = getState().shows.searchOptions
+    // don't allow to turn off all checkboxes:
+    const totalOptionsTurnedOn = Object.keys(options)
+      .map(key => !!options[key])
+      .reduce((acc, o) => o ? acc + 1 : acc, 0)
     switch (name) {
+      case 'title':
+        if (!options.title || totalOptionsTurnedOn > 1) dispatch({
+          type: 'TOGGLE_SEARCH_OPTION_TITLE',
+        })
+        break;
       case 'genres':
-        dispatch({
+        if (!options.genres || totalOptionsTurnedOn > 1) dispatch({
           type: 'TOGGLE_SEARCH_OPTION_GENRES',
         })
         break;
       case 'overview':
-        dispatch({
+        if (!options.overview || totalOptionsTurnedOn > 1) dispatch({
           type: 'TOGGLE_SEARCH_OPTION_OVERVIEW',
         })
         break;
