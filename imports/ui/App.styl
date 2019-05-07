@@ -23,6 +23,8 @@ tbody td
     display: inline-block;
     width: linkSize = 24px
     height: linkSize
+    &:not(:last-child)
+      padding-right: 0.5rem
     &:after
       content: ""
       background-size: contain
@@ -34,6 +36,8 @@ tbody td
       background-image: url("/youtube.svg")
     &.link_imdb:after
       background-image: url("/imdb.png")
+    &.link_home:after
+      background-image: url("/home.png")
 
 .pagination
   ul, li

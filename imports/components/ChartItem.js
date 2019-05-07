@@ -5,6 +5,7 @@ import countryFlagEmoji from "country-flag-emoji";
 
 import IMDBLink from './links/IMDBLink';
 import YTLink from './links/YTLink';
+import HomepageLink from './links/HomepageLink';
 import { chartFields } from '/imports/constants';
 
 const renderSpecialCell = (slug, show) => {
@@ -18,6 +19,10 @@ const renderSpecialCell = (slug, show) => {
           />
           <YTLink
             path={show.trailer}
+            title={show.title}
+          />
+          <HomepageLink
+            path={show.homepage}
             title={show.title}
           />
         </>
