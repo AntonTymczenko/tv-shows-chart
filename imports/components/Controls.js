@@ -22,16 +22,30 @@ const Controls = props => (
       }
     />
     <button>SEARCH</button>
-    <label htmlFor="">
-      <input
-        type="checkbox"
-        value={props.searchOptions.genres}
-        onChange={e => props.dispatch(toggleSearchOption('genres'))}
-        id="search-in-genres"
-      />
-      Search in genres too
-    </label>
     <Synchronizer />
+    <div className="search-options">
+      <span>
+        Search in:
+      </span>
+      <label htmlFor="search-in-genres">
+        <input
+          id="search-in-genres"
+          type="checkbox"
+          value={props.searchOptions.genres}
+          onChange={e => props.dispatch(toggleSearchOption('genres'))}
+        />
+        Genres
+      </label>
+      <label htmlFor="search-in-overview">
+        <input
+          id="search-in-overview"
+          type="checkbox"
+          value={props.searchOptions.overview}
+          onChange={e => props.dispatch(toggleSearchOption('overview'))}
+        />
+        Overview
+      </label>
+    </div>
   </form>
 )
 
