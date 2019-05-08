@@ -63,13 +63,16 @@ const renderSpecialCell = (slug, show) => {
 }
 
 const ChartItem = ({ show }) => (
-  <tr>
+  <div className="chart__item">
     { chartFields.filter(f => !f.hidden).map(({ slug }) => (
-      <td key={slug}>{
+      <div
+        className="cell"
+        key={slug}
+      >{
         renderSpecialCell(slug, show)
-      }</td>
+      }</div>
     ))}
-  </tr>
+  </div>
 )
 
 ChartItem.propTypes = {

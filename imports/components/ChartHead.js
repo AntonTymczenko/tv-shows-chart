@@ -11,19 +11,19 @@ const sortClasses = (field, stateSort) => {
   return classNames({
     sortable: field.sortable,
     active: currentSortType && field.slug === currentSortType,
-  }, order)
+  }, order, 'cell')
 }
 
 const ChartHead = props => (
-  <tr className="chart-head">
+  <div className="chart__head">
     { chartFields.filter(f => !f.hidden).map(field => (
-      <th
+      <div
         key={field.slug}
         className={ sortClasses(field, props.sort) }
         onClick={() => field.sortable && props.dispatch(handleSortChange(field.slug))}
-      >{ field.name }</th>
+      >{ field.name }</div>
     ))}
-  </tr>
+  </div>
 )
 
 

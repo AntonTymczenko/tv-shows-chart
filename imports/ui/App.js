@@ -23,14 +23,10 @@ class App extends Component {
 
         <main>
           <Controls />
-          <table>
-            <thead>
+          <div className="chart">
               <ChartHead />
-            </thead>
-            <tbody>
               <ChartList />
-            </tbody>
-          </table>
+          </div>
           <Pagination/>
         </main>
       </div>
