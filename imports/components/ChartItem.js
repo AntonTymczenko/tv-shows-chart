@@ -49,7 +49,7 @@ const renderSpecialCell = (slug, show) => {
           alt={name}
         />
         : <span>{ show.country }</span>
-    case 'genresList':
+    case 'genres':
       if (!Array.isArray(show.genres) || !show.genres.length) return null
       return (
         <span>
@@ -64,7 +64,7 @@ const renderSpecialCell = (slug, show) => {
 
 const ChartItem = ({ show }) => (
   <tr>
-    { chartFields.map(({ slug }) => (
+    { chartFields.filter(f => !f.hidden).map(({ slug }) => (
       <td key={slug}>{
         renderSpecialCell(slug, show)
       }</td>

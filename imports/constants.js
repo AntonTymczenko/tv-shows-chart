@@ -16,6 +16,7 @@ const chartFields = [
     name: 'Title',
     slug: 'title',
     sortable: true,
+    searchable: true,
   }, {
     name: 'Year',
     slug: 'year',
@@ -26,7 +27,13 @@ const chartFields = [
     sortable: true,
   }, {
     name: 'Genres',
-    slug: 'genresList',
+    slug: 'genres',
+    searchable: true,
+  }, {
+    name: 'Overview',
+    slug: 'overview',
+    searchable: true,
+    hidden: true,
   }, {
     name: 'Links',
     slug: 'links'

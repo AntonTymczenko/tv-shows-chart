@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Synchronizer from '/imports/components/Synchronizer'
 import { fetchCurrentPage, setSearchQuery, toggleSearchOption } from '/imports/actions/shows';
+import { chartFields } from '/imports/constants';
 
 const handleSearchChange = (dispatch, event) => {
   dispatch(setSearchQuery(event.target.value.trim))
@@ -37,16 +38,7 @@ const Controls = props => (
         />
         Everywhere
       </label>
-      {[{
-        name: 'Title',
-        slug: 'title',
-      },{
-        name: 'Genres',
-        slug: 'genres',
-      },{
-        name: 'Overview',
-        slug: 'overview',
-      }].map(field => (
+      { chartFields.filter(f => f.searchable).map(field => (
         <label htmlFor={`search-in-${field.slug}`}>
           <input
             id={`search-in-${field.slug}`}
