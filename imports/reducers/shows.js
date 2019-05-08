@@ -3,10 +3,10 @@ const showsReducerDefault = {
   query: '',
   queryObj: {},
   searchOptions: {
-    everywhere: false,
+    everywhere: true,
     title: true,
-    genres: false,
-    overview: false,
+    genres: true,
+    overview: true,
   },
   limit: 20,
   totalCount: 0,
