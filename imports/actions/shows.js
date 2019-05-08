@@ -144,6 +144,17 @@ export const toggleSearchOption = name => {
       .map(key => !!options[key])
       .reduce((acc, o) => o ? acc + 1 : acc, 0)
     switch (name) {
+      case 'everywhere':
+        if (!options.everywhere) {
+          dispatch({
+            type: 'SET_SEARCH_OPTIONS_ALL_TRUE'
+          })
+        } else {
+          dispatch({
+            type: 'SET_SEARCH_OPTIONS_ONLY_TITLE'
+          })
+        }
+        break;
       case 'title':
         if (!options.title || totalOptionsTurnedOn > 1) dispatch({
           type: 'TOGGLE_SEARCH_OPTION_TITLE',

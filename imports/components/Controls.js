@@ -27,6 +27,16 @@ const Controls = props => (
       <span>
         Search in:
       </span>
+      <label htmlFor="search-everywhere">
+        <input
+          id="search-everywhere"
+          type="checkbox"
+          value={props.searchOptions.everywhere}
+          checked={props.searchOptions.everywhere}
+          onChange={e => props.dispatch(toggleSearchOption('everywhere'))}
+        />
+        Everywhere
+      </label>
       <label htmlFor="search-in-title">
         <input
           id="search-in-title"
