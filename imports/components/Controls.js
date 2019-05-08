@@ -38,7 +38,8 @@ const Controls = props => (
         />
         Everywhere
       </label>
-      { chartFields.filter(f => f.searchable).map(field => (
+      { !props.searchOptions.everywhere &&
+        chartFields.filter(f => f.searchable).map(field => (
         <label htmlFor={`search-in-${field.slug}`}>
           <input
             id={`search-in-${field.slug}`}
