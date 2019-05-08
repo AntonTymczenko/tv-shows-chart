@@ -20,48 +20,48 @@ const Controls = props => {
   }
 
   return (
-  <form onSubmit={e => {
-    e.preventDefault()
-    props.dispatch(fetchCurrentPage())
-  }}>
-    <input
-      type="text"
-      value={queryText}
-      onChange={
-        e => handleSearchChange(e)
-      }
-    />
-    <button>SEARCH</button>
-    <Synchronizer />
-    <div className="search-options">
-      <span>
-        Search in:
-      </span>
-      <label htmlFor="search-everywhere">
-        <input
-          id="search-everywhere"
-          type="checkbox"
-          value={props.searchOptions.everywhere}
-          checked={props.searchOptions.everywhere}
-          onChange={e => props.dispatch(toggleSearchOption('everywhere'))}
-        />
-        Everywhere
-      </label>
-      { !props.searchOptions.everywhere &&
-        chartFields.filter(f => f.searchable).map(field => (
-        <label htmlFor={`search-in-${field.slug}`}>
+    <form onSubmit={e => {
+      e.preventDefault()
+      props.dispatch(fetchCurrentPage())
+    }}>
+      <input
+        type="text"
+        value={queryText}
+        onChange={
+          e => handleSearchChange(e)
+        }
+      />
+      <button>SEARCH</button>
+      <Synchronizer />
+      <div className="search-options">
+        <span>
+          Search in:
+        </span>
+        <label htmlFor="search-everywhere">
           <input
-            id={`search-in-${field.slug}`}
+            id="search-everywhere"
             type="checkbox"
-            value={props.searchOptions[field.slug]}
-            checked={props.searchOptions[field.slug]}
-            onChange={e => props.dispatch(toggleSearchOption(field.slug))}
+            value={props.searchOptions.everywhere}
+            checked={props.searchOptions.everywhere}
+            onChange={e => props.dispatch(toggleSearchOption('everywhere'))}
           />
-          {field.name}
+          Everywhere
         </label>
-      ))}
-    </div>
-  </form>
+        { !props.searchOptions.everywhere &&
+          chartFields.filter(f => f.searchable).map(field => (
+          <label htmlFor={`search-in-${field.slug}`}>
+            <input
+              id={`search-in-${field.slug}`}
+              type="checkbox"
+              value={props.searchOptions[field.slug]}
+              checked={props.searchOptions[field.slug]}
+              onChange={e => props.dispatch(toggleSearchOption(field.slug))}
+            />
+            {field.name}
+          </label>
+        ))}
+      </div>
+    </form>
   )
 }
 
