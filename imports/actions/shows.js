@@ -156,19 +156,34 @@ export const toggleSearchOption = name => {
         }
         break;
       case 'title':
-        if (!options.title || totalOptionsTurnedOn > 1) dispatch({
-          type: 'TOGGLE_SEARCH_OPTION_TITLE',
-        })
+        if (!options.title || totalOptionsTurnedOn > 1) {
+          dispatch({
+            type: 'TOGGLE_SEARCH_OPTION_TITLE',
+          })
+          dispatch({
+            type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
+          })
+        }
         break;
       case 'genres':
-        if (!options.genres || totalOptionsTurnedOn > 1) dispatch({
-          type: 'TOGGLE_SEARCH_OPTION_GENRES',
-        })
+        if (!options.genres || totalOptionsTurnedOn > 1) {
+          dispatch({
+            type: 'TOGGLE_SEARCH_OPTION_GENRES',
+          })
+          dispatch({
+            type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
+          })
+        }
         break;
       case 'overview':
-        if (!options.overview || totalOptionsTurnedOn > 1) dispatch({
-          type: 'TOGGLE_SEARCH_OPTION_OVERVIEW',
-        })
+        if (!options.overview || totalOptionsTurnedOn > 1) {
+          dispatch({
+            type: 'TOGGLE_SEARCH_OPTION_OVERVIEW',
+          })
+          dispatch({
+            type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
+          })
+        }
         break;
       default:
         return dispatch(showError(`No such search option ${name} to toggle in state`))

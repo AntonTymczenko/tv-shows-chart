@@ -54,6 +54,17 @@ export default (shows = showsReducerDefault, action) => {
         ...shows,
         queryObj: action.queryObj,
       }
+    case 'UPDATE_SEARCH_OPTION_EVERYWHERE':
+      return {
+        ...shows,
+        searchOptions: {
+          ...shows.searchOptions,
+          // set to false if one or more other options are 'false'
+          everywhere: !Object.keys(shows.searchOptions)
+            .filter(key => !shows.searchOptions[key] && key !== 'everywhere')
+            .length
+        }
+      }
     case 'SET_SEARCH_OPTIONS_ALL_TRUE':
       return {
         ...shows,
