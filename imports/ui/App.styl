@@ -1,8 +1,9 @@
 body
   margin: 0
-  padding: 1rem
   font-size: 16px
   font-family: sans-serif
+.container
+  padding: 1rem
 .chart > div
   width: 100%
   padding-top: 1rem
@@ -14,6 +15,7 @@ body
     place-self: stretch
 .sync-status
   display: inline-block
+  padding-left: 1rem
 .chart__head
   .sortable
     cursor: pointer
@@ -24,10 +26,10 @@ body
     &.desc:after
       content: ' ▼'
 .chart__item
-  .cell
-    height: 5rem
   img.poster
-    height: 100%
+    box-sizing: border-box
+    padding-right: 0.8rem
+    width: 100%
   img.flag
     width: 1.5rem
   .link

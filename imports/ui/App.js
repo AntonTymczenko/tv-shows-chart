@@ -16,7 +16,7 @@ const store = configureStore()
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <header>
           <h1>TV shows chart</h1>
         </header>
