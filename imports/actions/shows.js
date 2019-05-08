@@ -143,6 +143,7 @@ export const toggleSearchOption = name => {
     const totalOptionsTurnedOn = Object.keys(options)
       .map(key => !!options[key])
       .reduce((acc, o) => o ? acc + 1 : acc, 0)
+    let madeSomeChange = false
     switch (name) {
       case 'everywhere':
         if (!options.everywhere) {
@@ -154,6 +155,7 @@ export const toggleSearchOption = name => {
             type: 'SET_SEARCH_OPTIONS_ONLY_TITLE'
           })
         }
+        madeSomeChange = true
         break;
       case 'title':
         if (!options.title || totalOptionsTurnedOn > 1) {
@@ -163,6 +165,7 @@ export const toggleSearchOption = name => {
           dispatch({
             type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
           })
+          madeSomeChange = true
         }
         break;
       case 'genres':
@@ -173,6 +176,7 @@ export const toggleSearchOption = name => {
           dispatch({
             type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
           })
+          madeSomeChange = true
         }
         break;
       case 'overview':
@@ -183,11 +187,12 @@ export const toggleSearchOption = name => {
           dispatch({
             type: 'UPDATE_SEARCH_OPTION_EVERYWHERE'
           })
+          madeSomeChange = true
         }
         break;
       default:
         return dispatch(showError(`No such search option ${name} to toggle in state`))
     }
-    dispatch(setSearchQueryObject())
+    if (madeSomeChange) dispatch(setSearchQueryObject())
   }
 }
