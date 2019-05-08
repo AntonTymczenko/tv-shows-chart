@@ -10,7 +10,7 @@ Small project for learning React, Redux, Meteor.
 
 * Set up environment
   * Create `.env` file in root folder
-  * Add here a few envorinment variables
+  * Add here a few environment variables
     ```
   MONGO_URL="mongodb://localhost:27017/your-app-name-or-whatever"
   TRAKT_CLIENT_ID=7777777777777777777777777777777777777777777777777777777777777777
