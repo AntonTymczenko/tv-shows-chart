@@ -37,36 +37,27 @@ const Controls = props => (
         />
         Everywhere
       </label>
-      <label htmlFor="search-in-title">
-        <input
-          id="search-in-title"
-          type="checkbox"
-          value={props.searchOptions.title}
-          checked={props.searchOptions.title}
-          onChange={e => props.dispatch(toggleSearchOption('title'))}
-        />
-        Title
-      </label>
-      <label htmlFor="search-in-genres">
-        <input
-          id="search-in-genres"
-          type="checkbox"
-          value={props.searchOptions.genres}
-          checked={props.searchOptions.genres}
-          onChange={e => props.dispatch(toggleSearchOption('genres'))}
-        />
-        Genres
-      </label>
-      <label htmlFor="search-in-overview">
-        <input
-          id="search-in-overview"
-          type="checkbox"
-          value={props.searchOptions.overview}
-          checked={props.searchOptions.overview}
-          onChange={e => props.dispatch(toggleSearchOption('overview'))}
-        />
-        Overview
-      </label>
+      {[{
+        name: 'Title',
+        slug: 'title',
+      },{
+        name: 'Genres',
+        slug: 'genres',
+      },{
+        name: 'Overview',
+        slug: 'overview',
+      }].map(field => (
+        <label htmlFor={`search-in-${field.slug}`}>
+          <input
+            id={`search-in-${field.slug}`}
+            type="checkbox"
+            value={props.searchOptions[field.slug]}
+            checked={props.searchOptions[field.slug]}
+            onChange={e => props.dispatch(toggleSearchOption(field.slug))}
+          />
+          {field.name}
+        </label>
+      ))}
     </div>
   </form>
 )
