@@ -1,25 +1,34 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Synchronizer from '/imports/components/Synchronizer'
 import { fetchCurrentPage, setSearchQuery, toggleSearchOption } from '/imports/actions/shows';
 import { chartFields } from '/imports/constants';
 
-const handleSearchChange = (dispatch, event) => {
-  dispatch(setSearchQuery(event.target.value.trim))
-}
+const Controls = props => {
+  const [queryText, setQueryText] = useState(props.query)
+  const [queryTimeout, setQueryTimeout] = useState(null)
 
-const Controls = props => (
+  const handleSearchChange = e => {
+    const text = e.target.value
+    setQueryText(text)
+    clearTimeout(queryTimeout)
+    setQueryTimeout(setTimeout(() => {
+      props.dispatch(setSearchQuery(text))
+    }, 400))
+  }
+
+  return (
   <form onSubmit={e => {
     e.preventDefault()
     props.dispatch(fetchCurrentPage())
   }}>
     <input
       type="text"
-      value={props.query}
+      value={queryText}
       onChange={
-        e => props.dispatch(setSearchQuery(e.target.value))
+        e => handleSearchChange(e)
       }
     />
     <button>SEARCH</button>
@@ -53,7 +62,8 @@ const Controls = props => (
       ))}
     </div>
   </form>
-)
+  )
+}
 
 const mapStateToProps = (state, props) => ({
   query: state.shows.query,

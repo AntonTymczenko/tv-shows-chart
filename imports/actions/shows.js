@@ -128,9 +128,8 @@ export const setSearchQueryObject = () => {
 }
 
 export const setSearchQuery = query => {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(setSearchQueryText(query))
-
     dispatch(setCurrentPage(0))
     dispatch(setSearchQueryObject())
   }
