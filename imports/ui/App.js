@@ -22,8 +22,8 @@ class App extends Component {
         <main>
           <Controls />
           <div className="chart">
-              <ChartHead />
-              <ChartList />
+            <ChartHead />
+            <ChartList />
           </div>
           <Pagination/>
         </main>
