@@ -63,7 +63,7 @@ const renderSpecialCell = (slug, show) => {
 }
 
 const ChartItem = ({ show }) => (
-  <div className="chart__item">
+  <div className="row chart__item">
     { chartFields.filter(f => !f.hidden).map(({ slug }) => (
       <div
         className="cell"

@@ -21,7 +21,7 @@ class App extends Component {
 
         <main>
           <Controls />
-          <div className="chart">
+          <div>
             <ChartHead />
             <ChartList />
           </div>

@@ -15,7 +15,7 @@ const sortClasses = (field, stateSort) => {
 }
 
 const ChartHead = props => (
-  <div className="chart__head">
+  <div className="row chart__head">
     { chartFields.filter(f => !f.hidden).map(field => (
       <div
         key={field.slug}
