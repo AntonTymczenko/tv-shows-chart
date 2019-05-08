@@ -9,8 +9,6 @@ import ChartHead from '/imports/components/ChartHead'
 import ChartList from '/imports/components/ChartList'
 import Pagination from '/imports/components/Pagination'
 
-import './App.styl'
-
 const store = configureStore()
 
 class App extends Component {
