@@ -30,7 +30,7 @@ const ChartItem = ({ show }) => (
     <div className="cell cell_genres">
       <Genres genres={show.genres} />
     </div>
-    <div className="cell cell_country">
+    <div className="cell cell_links">
       <Links
         title={show.title}
         imdb={show.ids.imdb}
