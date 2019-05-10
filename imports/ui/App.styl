@@ -4,19 +4,79 @@ body
   font-family: sans-serif
 .container
   padding: 1rem
+  max-width: 1100px
+  margin: 0 auto
 .row
   padding-top: 1rem
   display: grid
-  grid-template-columns: 10% 10% 6% auto 6% 7% 25% 11%;
   grid-gap: 0.8rem;
   justify-content: stretch
   .cell
     display: inline-block
     place-self: stretch
+
+/* EXTRA SMALL */
+@media (max-width: 499px)
+  .row
+    grid-template-columns: repeat(3, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+
+/* SMALL */
+@media (min-width: 500px) and (max-width: 767px)
+  .row
+    grid-template-columns: repeat(6, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+  .cell_poster
+    grid-column: 1 / span 2
+    grid-row: 1 / span 2
+  .cell_title
+    grid-column: 3 / span 4
+    grid-row: 1 / span 1
+
+/* MEDIUM */
+@media (min-width: 768px) and (max-width: 979px)
+  .row
+    grid-template-columns: repeat(10, 1fr)
+    grid-template-rows: repeat(4, 1fr)
+  .cell_poster
+    grid-column: 1 / span 2
+    grid-row: 1 / span 4
+  .cell_title
+    grid-column: 3 / span 6
+    grid-row: 1 / span 2
+  .cell_genres
+    grid-column: 9 / span 2
+    grid-row: 1 / span 4
+  .cell_watchers
+    grid-column: 3 / span 2
+    grid-row: 3 / span 1
+  .cell_rating
+    grid-column: 5 / span 2
+    grid-row: 3 / span 1
+  .cell_votes
+    grid-column: 7 / span 2
+    grid-row: 3 / span 1
+  .cell_year
+    grid-column: 3 / span 2
+    grid-row: 4 / span 1
+  .cell_country
+    grid-column: 5 / span 2
+    grid-row: 4 / span 1
+  .cell_links
+    grid-column: 7 / span 2
+    grid-row: 4 / span 1
+
+/* LARGE */
+@media (min-width: 980px)
+  .row
+    grid-template-columns: 10% 9% 6% auto 6% 7% 23% 11%;
+    grid-template-rows: auto
+
 .sync-status
   display: inline-block
   padding-left: 1rem
 .chart__head
+  display: none
   .sortable
     cursor: pointer
   .active
@@ -25,6 +85,8 @@ body
       content: ' ▲'
     &.desc:after
       content: ' ▼'
+  @media (min-width: 980px)
+    display: grid
 .chart__item
   img.poster
     width: 100%
