@@ -52,26 +52,44 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
     const query = `api_key=${TMDB_KEY}`
     const error = new Error(errMsg(ids.tmdb, 'tmdb'))
 
-    HTTP.get(url, { query }, (err, res) => {
-      if (err) return resolve({
-        ...error,
-        request_url: url,
-        response: err.response,
-        status: err.response && err.response.statusCode || 500,
-      })
-      const toSave = {
-        poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
-        last_aired: new Date(res.data.last_air_date),
+    const makeRequest = callback => HTTP.get(url, { query }, (err, res) => {
+      if (err) {
+        if (err.response && err.response.statusCode === 429) {
+          const timeout = err.response.headers['retry-after'] * 1000
+          Meteor.setTimeout(
+            () => makeRequest(tmdbResolve)
+          , timeout)
+        } else {
+          return callback({
+            ...error,
+            request_url: url,
+            response: err.response,
+            status: err.response && err.response.statusCode || 500,
+          })
+        }
       }
+
+      // if no error, return document's new parts
+      return callback({
+        poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
+        last_aired: res.data.last_air_date && new Date(res.data.last_air_date),
+      })
+    })
+
+    const tmdbResolve = res => {
+      if (res.status) return resolve(res)
+
       Shows.update(
         { _id },
-        { $set: toSave},
+        { $set: res },
         (err, res) => {
           if (err || res !== 1) return reject(error)
           resolve(ok)
         }
       )
-    })
+    }
+
+    makeRequest(tmdbResolve)
   })
 
   Promise.all([traktRequest, tmdbRequest])
