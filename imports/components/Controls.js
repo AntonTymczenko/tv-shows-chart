@@ -49,7 +49,10 @@ const Controls = props => {
         </label>
         { !props.searchOptions.everywhere &&
           chartFields.filter(f => f.searchable).map(field => (
-          <label htmlFor={`search-in-${field.slug}`}>
+          <label
+            htmlFor={`search-in-${field.slug}`}
+            key={field.slug}
+          >
             <input
               id={`search-in-${field.slug}`}
               type="checkbox"
