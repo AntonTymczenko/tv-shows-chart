@@ -60,20 +60,19 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
             () => makeRequest(tmdbResolve)
           , timeout)
         } else {
-          return callback({
+          callback({
             ...error,
             request_url: url,
             response: err.response,
             status: err.response && err.response.statusCode || 500,
           })
         }
+      } else { // if no error, return document's new parts
+        callback({
+          poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
+          last_aired: res.data.last_air_date && new Date(res.data.last_air_date),
+        })
       }
-
-      // if no error, return document's new parts
-      return callback({
-        poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
-        last_aired: res.data.last_air_date && new Date(res.data.last_air_date),
-      })
     })
 
     const tmdbResolve = res => {
