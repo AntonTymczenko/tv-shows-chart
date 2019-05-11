@@ -19,8 +19,8 @@ const msgAPI = api => {
 const errMsg = (id, api) => `Error trying to update ${msgAPI(api)}${id}`
 
 export default ({ _id, ids }) => new Promise((resolve, reject) => {
-    // Trakt summary
-    const traktRequest = new Promise((resolve, reject) => {
+  // Trakt summary
+  const traktRequest = new Promise((resolve, reject) => {
     const url = `https://api.trakt.tv/shows/${ids.trakt}`
     const headers = httpHeaders.trakt
     const query = 'extended=full'
