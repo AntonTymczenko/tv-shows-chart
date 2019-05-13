@@ -69,6 +69,11 @@ body
   padding: 0.5rem
 
 .pagination
+  display: flex
+  flex-wrap: wrap
+  ul
+    margin: 1rem 0
+    padding: 0
   ul, li, a
     display: inline-block
   li
@@ -92,6 +97,8 @@ body
         cursor: pointer
         &:hover, &:active, &:focus
           background: linen
+@import './styles/select'
+
 
 /* SMALL */
 @media (max-width: 499px)

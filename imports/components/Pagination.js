@@ -7,16 +7,19 @@ import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ limit, page, pageCount, dispatch }) => (
   <div className="pagination">
-    <label htmlFor="per-page-select">Per page</label>
-    <select
-      id="per-page-select"
-      value={limit}
-      onChange={e => dispatch(setLimit(parseInt(e.target.value))) }
-    >
-      <option value="10">10</option>
-      <option value="20">20</option>
-      <option value="40">40</option>
-    </select>
+    <div className="per-page-select">
+      <label htmlFor="per-page-select">Per page</label>
+      <select
+        id="per-page-select"
+        className="select-css"
+        value={limit}
+        onChange={e => dispatch(setLimit(parseInt(e.target.value))) }
+      >
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+      </select>
+    </div>
     <ReactPaginate
       previousLabel={ <SVG src="/arrow_left.svg" ></SVG> }
       nextLabel={ <SVG src="/arrow_right.svg" ></SVG> }
