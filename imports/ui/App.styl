@@ -12,8 +12,17 @@ body
   grid-gap: 0.8rem;
   justify-content: stretch
   .cell
-    display: inline-block
     place-self: stretch
+    p:first-child
+      margin-top: 0
+    p:last-child
+      margin-bottom: 0
+.cell_title
+  font-size: 1.2rem
+  font-weight: 700
+  height: 2rem
+.cell_watchers, .cell_rating, .cell_year, .cell_country, .cell_links
+  display: none
 
 .sync-status
   display: inline-block
@@ -29,7 +38,12 @@ body
     &.desc:after
       content: ' ▼'
 .chart__item
+  border: 1px solid rgba(200,200,200,0.5)
+  border-radius: 0.5rem
+  margin: 0.5rem 0
+  padding: 0.5rem
   img.poster
+    border-radius: 0.5rem
     width: 100%
   img.flag
     width: 1.5rem

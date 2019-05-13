@@ -1,7 +1,16 @@
 .row
   grid-template-columns: repeat(3, 1fr)
+  grid-template-rows: repeat(3, auto)
 .cell_poster
   grid-row: 1 / span 2
 .cell_title
   grid-column: 2 / span 2
-  grid-row: 1 / span 1
+  grid-row: 1
+.cell_compact
+  grid-column: 2 / span 2
+  grid-row: 2
+.cell_genres
+  grid-column: 1 / span 3
+  gird-row: 3
+  .legend
+    display: inline

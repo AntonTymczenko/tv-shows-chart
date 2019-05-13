@@ -5,6 +5,8 @@ import Country from './Country'
 import Genres from './Genres'
 import Links from './Links'
 
+const roundedRating = rating => Math.round((rating || 0 ) * 100) / 100
+
 const ChartItem = ({ show }) => (
   <div className="row chart__item">
     <div className="cell cell_poster">
@@ -16,7 +18,7 @@ const ChartItem = ({ show }) => (
       { show.watchers }
     </div>
     <div className="cell cell_rating">
-      { Math.round((show.rating || 0 ) * 100) / 100 }
+      { roundedRating(show.rating) }
     </div>
     <div className="cell cell_title">
       { show.title }
@@ -28,6 +30,7 @@ const ChartItem = ({ show }) => (
       <Country countryCode={show.country} />
     </div>
     <div className="cell cell_genres">
+      <p className="legend">Genres: </p>
       <Genres genres={show.genres} />
     </div>
     <div className="cell cell_links">
@@ -37,6 +40,24 @@ const ChartItem = ({ show }) => (
         homepage={show.homepage}
         trailer={show.trailer}
       />
+    </div>
+    <div className="cell cell_compact">
+      <p>
+        Watchers: { show.watchers }
+        Rating: { roundedRating(show.rating) }
+      </p>
+      <p>
+        Year: { show.year }
+        Country: <Country countryCode={show.country} />
+      </p>
+      <p>
+        <Links
+          title={show.title}
+          imdb={show.ids.imdb}
+          homepage={show.homepage}
+          trailer={show.trailer}
+        />
+      </p>
     </div>
   </div>
 )
