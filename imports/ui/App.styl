@@ -69,15 +69,24 @@ body
   padding: 0.5rem
 
 .pagination
-  ul, li
+  ul, li, a
     display: inline-block
   li
-    height: auto
     &.active
       font-weight: bold
+    .isvg
+      height: 100%
+      line-heigth: 100%
+      display: inline-block
+      svg
+        vertical-align: middle;
+    a, .isvg
+      text-align: center
+      width: 3rem
     a
+      height: 3rem
+      line-height: 3rem
       border-radius: 0.4rem 1.2rem 0.4rem
-      padding: 1rem
     &:not(.disabled)
       a
         cursor: pointer

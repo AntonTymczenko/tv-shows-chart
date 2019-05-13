@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SVG from 'react-inlinesvg';
 
 import { setCurrentPage, setLimit } from '/imports/actions/shows';
 import ReactPaginate from 'react-paginate';
@@ -17,8 +18,8 @@ const Pagination = ({ limit, page, pageCount, dispatch }) => (
       <option value="40">40</option>
     </select>
     <ReactPaginate
-      previousLabel={'previous'}
-      nextLabel={'next'}
+      previousLabel={ <SVG src="/arrow_left.svg" ></SVG> }
+      nextLabel={ <SVG src="/arrow_right.svg" ></SVG> }
       breakLabel={'...'}
       breakClassName={'break-me'}
       forcePage={page}
