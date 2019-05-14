@@ -1,0 +1,91 @@
+.search
+  width: 100%
+  max-width: 500px
+  display: inline-flex
+  flex: 1 1 300px
+  border: 1px solid #ccc
+  border-radius: 0.5rem
+  overflow: hidden
+
+searchMain = 2rem
+.search__input
+  height: searchMain
+  border: 0
+  padding: 0 0.5rem
+  flex: 1
+
+.search__button
+  width: searchMain
+  background-repeat: no-repeat
+  background-position: top left
+  background-size: searchMain
+  border: 0
+  padding: 0
+  border-radius: 0
+  color: white
+  cursor: pointer
+
+.search__button_submit
+  background-image: url('/search.svg')
+.search__button_controls
+  background-image: url('/arrow_drop_down.svg')
+.search__button_controls_active
+  background-image: url('/arrow_drop_up.svg')
+
+// .search__options
+//   label
+//     display: block
+
+.switch
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.switch input
+  opacity: 0
+  width: 0
+  height: 0
+
+.switch__label
+  opacity: 1
+
+sliderSize = 2rem
+.switch__slider-container
+  position: relative
+  display: inline-block
+  width: 1.76 * sliderSize
+  height: sliderSize
+.switch__slider
+  position: absolute
+  cursor: pointer
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  border-radius: sliderSize
+  background-color: #ccc
+  -webkit-transition: .2s
+  transition: .2s
+
+.switch__slider:before
+  position: absolute
+  content: ""
+  height: 0.76 * sliderSize
+  width: 0.76 * sliderSize
+  left: 4px
+  bottom: 4px
+  border-radius: 50%
+  background-color: white
+  -webkit-transition: .2s
+  transition: .2s
+
+input:checked + .switch__slider
+  background-color: #2196F3
+
+input:focus + .switch__slider
+  box-shadow: 0 0 1px #2196F3
+
+input:checked + .switch__slider:before
+  -webkit-transform: translateX(0.76 * sliderSize)
+  -ms-transform: translateX(0.76 * sliderSize)
+  transform: translateX(0.76 * sliderSize)
