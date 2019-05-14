@@ -27,11 +27,14 @@ const Controls = props => {
   }
 
   return (
-    <form onSubmit={e => {
-      e.preventDefault()
-      props.dispatch(fetchCurrentPage())
-    }}>
-      <div className="search">
+    <form
+      className="search"
+      onSubmit={e => {
+        e.preventDefault()
+        props.dispatch(fetchCurrentPage())
+      }}
+    >
+      <div className="search__query">
         <input
           className="search__input"
           type="text"
