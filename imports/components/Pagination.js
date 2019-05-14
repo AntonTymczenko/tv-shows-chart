@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ limit, page, pageCount, dispatch }) => (
   <div className="pagination">
-    <div className="per-page-select">
+    <div className="per-page-select-wrapper">
       <label htmlFor="per-page-select">Per page</label>
       <select
         id="per-page-select"
