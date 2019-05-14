@@ -20,6 +20,7 @@ const Pagination = ({ limit, page, pageCount, dispatch }) => (
         <option value="40">40</option>
       </select>
     </div>
+    <div className="pagination__list-wrapper">
     <ReactPaginate
       previousLabel={ <SVG src="/arrow_left.svg" ></SVG> }
       nextLabel={ <SVG src="/arrow_right.svg" ></SVG> }
@@ -33,6 +34,7 @@ const Pagination = ({ limit, page, pageCount, dispatch }) => (
       subContainerClassName={'pages pagination'}
       activeClassName={'active'}
     />
+    </div>
   </div>
 )
 
