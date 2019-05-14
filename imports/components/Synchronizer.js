@@ -9,7 +9,7 @@ import { setTotalShowsCount } from '/imports/actions/shows';
 const LoadingStatus = props => (
   <p className="sync-status">{ props.loading ?
     'LOADING...' :
-    `found ${props.totalCount}`
+    props.totalCount ? `Found ${props.totalCount}` : 'Nothing is found'
   }</p>
 )
 
