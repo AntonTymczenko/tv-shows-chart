@@ -21,19 +21,19 @@ const Pagination = ({ limit, page, pageCount, dispatch }) => (
       </select>
     </div>
     <div className="pagination__list-wrapper">
-    <ReactPaginate
-      previousLabel={ <SVG src="/arrow_left.svg" ></SVG> }
-      nextLabel={ <SVG src="/arrow_right.svg" ></SVG> }
-      breakLabel={'...'}
-      breakClassName={'break-me'}
-      forcePage={page}
-      pageCount={pageCount}
-      marginPagesDisplayed={2}
-      pageRangeDisplayed={5}
-      onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
-      subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
-    />
+      <ReactPaginate
+        previousLabel={ <SVG src="/arrow_left.svg" ></SVG> }
+        nextLabel={ <SVG src="/arrow_right.svg" ></SVG> }
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        forcePage={page}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={({ selected }) => dispatch(setCurrentPage(selected))}
+        subContainerClassName={'pages pagination'}
+        activeClassName={'active'}
+      />
     </div>
   </div>
 )
