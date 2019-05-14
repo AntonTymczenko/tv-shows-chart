@@ -58,7 +58,7 @@ export const setCurrentPage = (page = 0) => {
   }
 }
 
-const setSortOrder = (slug, order) => {
+export const setSortOrder = (slug, order) => {
   return dispatch => {
     dispatch({
       type: 'SET_SORT_TYPE',

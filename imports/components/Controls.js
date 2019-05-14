@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Synchronizer from '/imports/components/Synchronizer'
 import { fetchCurrentPage, setSearchQuery, toggleSearchOption } from '/imports/actions/shows';
 import { chartFields } from '/imports/constants';
+import { setSortOrder } from '/imports/actions/shows';
 
 const Controls = props => {
   const [queryText, setQueryText] = useState(props.query)
@@ -24,6 +25,12 @@ const Controls = props => {
   const toggleAdditionalSearchOptions = e => {
     e.preventDefault()
     setShowControls(!showControls)
+  }
+
+  const handleSortOptionChoice = e => {
+    const [slug, order] = e.target.value.split('-')
+    if (order !== 'asc' && order !== 'desc') return console.error('Wrong option value')
+    props.dispatch(setSortOrder(slug, order === 'asc' ? 1 : -1))
   }
 
   return (
@@ -56,7 +63,7 @@ const Controls = props => {
         ></button>
       </div>
 
-      { showControls &&
+      { showControls && <>
       <div className="search__options">
         <label
           htmlFor="search-everywhere"
@@ -99,7 +106,27 @@ const Controls = props => {
           </label>
         ))}
       </div>
-      }
+      <div className="search__sorting">
+        <label htmlFor="sorting-select">Sort by</label>
+        <select
+          id="sorting-select"
+          className="select-css"
+          value={props.sorting}
+          onChange={handleSortOptionChoice}
+        >
+          <option value="watchers-desc">Watchers 9-0</option>
+          <option value="watchers-asc">Watchers 0-9</option>
+          <option value="rating-desc">Rating 9-0</option>
+          <option value="rating-asc">Rating 0-9</option>
+          <option value="title-asc">Title A-z</option>
+          <option value="title-desc">Title z-A</option>
+          <option value="year-asc">Year 0-9</option>
+          <option value="year-desc">Year 9-0</option>
+          <option value="country-asc">Country A-z</option>
+          <option value="country-desc">Country z-A</option>
+        </select>
+      </div>
+      </>}
       <Synchronizer />
     </form>
   )
@@ -108,6 +135,7 @@ const Controls = props => {
 const mapStateToProps = (state, props) => ({
   query: state.shows.query,
   searchOptions: state.shows.searchOptions,
+  sorting: `${Object.keys(state.shows.sort)[0]}-${state.shows.sort[Object.keys(state.shows.sort)[0]] === 1 ? 'asc' : 'desc'}`
 })
 
 export default connect(mapStateToProps)(Controls);
