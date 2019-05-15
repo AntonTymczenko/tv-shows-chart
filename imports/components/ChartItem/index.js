@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Country from './Country'
 import Genres from './Genres'
@@ -9,10 +10,16 @@ const roundedRating = rating => Math.round((rating || 0 ) * 100) / 100
 
 const ChartItem = ({ show }) => (
   <div className="row chart__item">
-    <div className="cell cell_poster">
-      { show.poster_path &&
-        <img className="poster" src={show.poster_path} />
-      }
+    <div
+      className={classNames('cell', 'cell_poster', {
+        'no-poster': !show.poster_path
+      })}
+    >
+      <img
+        className="poster"
+        src={show.poster_path || '/no-image.png'}
+        alt={show.poster_path ? show.title + ' poster' : 'No poster available'}
+      />
     </div>
     <div className="cell cell_watchers">
       { show.watchers }
