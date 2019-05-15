@@ -12,6 +12,19 @@ import Pagination from '/imports/components/Pagination'
 const store = configureStore()
 
 class App extends Component {
+  componentDidMount() {
+    const navbar = document.getElementById('navbar')
+    const sticky = navbar.offsetTop
+
+    window.onscroll = () => {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add('controls-header_fixed')
+      } else {
+        navbar.classList.remove('controls-header_fixed')
+      }
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -19,12 +32,15 @@ class App extends Component {
           <h1>TV shows chart</h1>
         </header>
 
-        <main>
-          <Controls />
-          <div>
+        <nav className="controls-header" id="navbar">
+          <div className="container">
+            <Controls />
             <ChartHead />
-            <ChartList />
           </div>
+        </nav>
+
+        <main>
+          <ChartList />
           <Pagination/>
         </main>
       </div>

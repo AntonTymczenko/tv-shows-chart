@@ -1,6 +1,8 @@
 .search
+  padding: 0 0.5rem
   width: 100%
   max-width: 420px
+  box-sizing: border-box
 .search__query
   width: 100%
   display: inline-flex
@@ -40,8 +42,9 @@ searchMain = 2rem
   display: flex
   justify-content: space-between
   align-items: center
-  &, .sync-status
-    margin: 0.5rem 0 0 0
+  margin: 0.5rem 0 0 0
+.sync-status
+  margin: 0.5rem 0
 
 .switch input
   opacity: 0
@@ -66,8 +69,8 @@ sliderSize = 1.6rem
   bottom: 0
   border-radius: sliderSize
   background-color: #ccc
-  -webkit-transition: .2s
-  transition: .2s
+  -webkit-transition: .1s
+  transition: .1s
 
 .switch__slider:before
   position: absolute
@@ -78,8 +81,8 @@ sliderSize = 1.6rem
   bottom: 4px
   border-radius: 50%
   background-color: white
-  -webkit-transition: .2s
-  transition: .2s
+  -webkit-transition: .1s
+  transition: .1s
 
 input:checked + .switch__slider
   background-color: #2196F3
