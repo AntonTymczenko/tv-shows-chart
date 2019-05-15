@@ -11,11 +11,11 @@ Small project for learning React, Redux, Meteor.
 * Set up environment
   * Create `.env` file in root folder
   * Add here a few environment variables
-    ```
+```
   MONGO_URL="mongodb://localhost:27017/your-app-name-or-whatever"
   TRAKT_CLIENT_ID=7777777777777777777777777777777777777777777777777777777777777777
   TMDB_KEY=77777777777777777777777777777777
-    ```
+```
   * If you have a question what is the `TRAKT_CLIENT_ID` or `TMDB_KEY` you should read about next APIs: [Trakt docs](https://trakt.docs.apiary.io/#
   ), [The Movie DB docs](https://developers.themoviedb.org/3/getting-started/introduction).
   * `MONGO_URL` is optional. If you omit it — Meteor would use its own MongoDB. But it's more convenient to monitor your local database with a tool like [Robo 3T](https://robomongo.org/).
