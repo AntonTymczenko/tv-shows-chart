@@ -43,12 +43,20 @@ const ChartItem = ({ show }) => (
     </div>
     <div className="cell cell_compact">
       <p>
-        Watchers: { show.watchers }
-        Rating: { roundedRating(show.rating) }
+        <span className="compact-info">
+          Watchers: { show.watchers }
+        </span>
+        <span className="compact-info">
+          Rating: { roundedRating(show.rating) }
+        </span>
       </p>
       <p>
-        Year: { show.year }
-        Country: <Country countryCode={show.country} />
+        <span className="compact-info">
+          Year: { show.year }
+        </span>
+        <span className="compact-info">
+          Country: <Country countryCode={show.country} />
+        </span>
       </p>
       <p>
         <Links
