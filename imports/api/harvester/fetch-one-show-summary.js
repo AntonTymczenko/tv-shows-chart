@@ -69,7 +69,8 @@ export default ({ _id, ids }) => new Promise((resolve, reject) => {
         }
       } else { // if no error, return document's new parts
         callback({
-          poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
+          poster_path: res.data.poster_path && `https://image.tmdb.org/t/p/w200${res.data.poster_path}`,
+          poster_path_wide: res.data.poster_path && `https://image.tmdb.org/t/p/w500${res.data.poster_path}`,
           last_aired: res.data.last_air_date && new Date(res.data.last_air_date),
         })
       }
