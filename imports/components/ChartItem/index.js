@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -6,14 +6,25 @@ import {roundedRating} from '/imports/helpers.js'
 import Country from './Country'
 import Genres from './Genres'
 import Links from './Links'
+import ModalDetailedView from './ModalDetailedView.jsx'
 
 function ChartItem({show}) {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false)
+  }
+  const handleOpenModal = () => {
+    setIsOpenModal(true)
+  }
+
   return (
     <div className="row chart__item">
       <div
-        className={classNames('cell', 'cell_poster', {
+        className={classNames('cell', 'cell_poster', 'pointer', {
           'no-poster': !show.poster_path
         })}
+        onClick={handleOpenModal}
       >
         <img
           className="poster"
@@ -27,7 +38,10 @@ function ChartItem({show}) {
       <div className="cell cell_rating">
         { roundedRating(show.rating) }
       </div>
-      <div className="cell cell_title">
+      <div
+        className="cell cell_title pointer"
+        onClick={handleOpenModal}
+      >
         { show.title }
       </div>
       <div className="cell cell_year">
@@ -86,6 +100,11 @@ function ChartItem({show}) {
           />
         </p>
       </div>
+      <ModalDetailedView
+        open={isOpenModal}
+        show={show}
+        close={handleCloseModal}
+      />
     </div>
   )
 }
