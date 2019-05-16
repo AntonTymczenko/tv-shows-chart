@@ -8,7 +8,8 @@ import Links from './Links'
 
 const roundedRating = rating => Math.round((rating || 0 ) * 100) / 100
 
-const ChartItem = ({ show }) => (
+function ChartItem({show}) {
+  return (
   <div className="row chart__item">
     <div
       className={classNames('cell', 'cell_poster', {
@@ -87,7 +88,8 @@ const ChartItem = ({ show }) => (
       </p>
     </div>
   </div>
-)
+  )
+}
 
 ChartItem.propTypes = {
   show: PropTypes.shape({
