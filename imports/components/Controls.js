@@ -52,11 +52,11 @@ const Controls = props => {
           }
         />
         { queryText.trim() &&
-          <button className="search__button search__button_submit"></button>
+          <button className="search__button search__button_submit pointer"></button>
         }
         <button
           className={
-            classNames('search__button', 'search__button_controls',
+            classNames('search__button', 'search__button_controls', 'pointer',
             { search__button_controls_active: showControls })
           }
           onClick={toggleAdditionalSearchOptions}
