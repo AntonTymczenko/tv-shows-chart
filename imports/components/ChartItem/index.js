@@ -2,11 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import {roundedRating} from '/imports/helpers.js'
 import Country from './Country'
 import Genres from './Genres'
 import Links from './Links'
-
-const roundedRating = rating => Math.round((rating || 0 ) * 100) / 100
 
 function ChartItem({show}) {
   return (
