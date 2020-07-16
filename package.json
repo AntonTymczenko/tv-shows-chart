@@ -18,7 +18,7 @@
     "@babel/runtime": "^7.3.4",
     "classnames": "^2.2.6",
     "country-flag-emoji": "^1.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "meteor-node-stubs": "^0.4.1",
     "postcss": "^6.0.22",
     "postcss-load-config": "^1.2.0",
